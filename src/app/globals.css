@@ -1,0 +1,221 @@
+/* Шрифты */
+@font-face {
+  font-family: 'Montserrat'; /* Любое имя для твоего шрифта */
+  src: url('/fonts/Montserrat-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat'; /* Любое имя для твоего шрифта */
+  src: url('/fonts/Montserrat-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'America-XIX'; /* Любое имя для твоего шрифта */
+  src: url('/fonts/America_XIX.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Переменные */
+:root {
+  --bg: #F5FFF3;
+  --primary: #754F9B;       
+  --primary-hvr: rgb(117 79 155 / 0.3);
+  --accent: #536F43;
+  --accent-lt: #C7ED98;
+  --lite: #FFFBFB;
+  --subdued: #DDDDDD;
+
+  /* Размер шрифта */
+  --h2: clamp(3rem, 4vw, 4.5rem);  /* 36->24 */
+  --main-txt: 2.5rem;  /* 20->14 */
+  --card-ttl: 2.25rem;  /* 18->14 */
+  --small-txt: 2rem;  /* 16->12 */
+
+  /* Отступы между*/
+  --gap-v-block: 40px;
+  --gap-v-group: 24px;
+
+  --gap-item: 16px;
+  --gap-card: 24px;
+
+  /* Отступы внутрь*/
+  --padd-v-block: 40px;
+  --padd-v-item: 16px;
+  --padd-v-btn: 12px;
+  --padd-v-small-btn: 8px;
+
+  --padd-h-block: 32px;
+  --padd-h-item: 24px;
+  --padd-h-btn: 24px;
+  --padd-h-small-btn: 16px;
+
+  --padd-v-header: 16px; /* 16->8 */
+  --padd-h-header: 16px; /* 16->16 */
+  --padd-card: 16px;
+
+  --block-radius: 40px;
+  --radius-btn: 100vh;
+  --radius-card: 20px;
+}
+
+/* Обнуление */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 50%;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--primary);
+  font-size: var(--text);
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: var(--primary);
+  padding-block: var(--padd-v-header);
+  padding-inline: var(--padd-h-header);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: var(--block-radius);
+  border-bottom-right-radius: var(--block-radius);
+  z-index: 10;
+  max-height: 80px;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 104px;
+  border-bottom-left-radius: var(--block-radius);
+  border-bottom-right-radius: var(--block-radius);
+  background: linear-gradient(
+    to bottom,
+    rgba(93, 63, 211, 0.4),
+    rgba(93, 63, 211, 0)
+  );
+  filter: blur(6px);
+  pointer-events: none;
+  z-index: -1;
+}
+.header-logo {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translate(-50%, 0);
+  z-index: 15;
+}
+
+.footer{
+  background-color: var(--primary);
+  font-size: var(--small-txt);
+  color: var(--subdued);
+  padding-block: var(--padd-v-block);
+  padding-inline: var(--padd-h-block);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-v-group);
+  border-top-left-radius: var(--block-radius);
+  border-top-right-radius: var(--block-radius);
+}
+h1 {
+  font-family: 'America-XIX', system-ui, sans-serif;
+  font-size: var(--h2);
+  color: var(--accent);
+}
+
+h2 {
+  font-family: 'America-XIX', system-ui, sans-serif;
+  font-size: var(--h2);
+  color: var(--lite);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Общие классы */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.pageWrapper{
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
+.main{
+  flex-grow: 1;
+}
+
+
+.button-hdr{
+  padding-inline: var(--padd-h-btn);
+  padding-block: var(--padd-v-btn);
+  border: 2px solid var(--lite);
+  color: var(--lite);
+  font-size: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+}
+.button-card{
+  padding-inline: var(--padd-h-btn);
+  padding-block: var(--padd-v-btn);
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  font-size: 2rem;
+  
+}
