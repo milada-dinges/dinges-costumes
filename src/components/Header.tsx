@@ -3,22 +3,26 @@ import Image from "next/image";
 
 export default function Header() {
     return(
+      <div className="header__group">
         <header className="header">
-            <Link className="header__button" href="#rentalterms">
-              условия аренды
-            </Link>
+          <Link className="header__button" href="#rentalterms">
+            условия аренды
+          </Link>
 
-            <div className="header__logo">
-              <Image src='/icons/logo.svg' fill
-              alt="Логотип Костюмерная Дингес" priority/>
+          <div className="header__logo">
+            <Image src='/icons/logo.svg' fill
+            alt="Логотип Костюмерная Дингес" priority/>
+          </div>
+
+          <a className="header__button" href="#" target="_blank" rel="noopener noreferrer">
+            написать на
+            <div className="header__avito-logo">
+              <Image src='/icons/avito-logo.svg' alt="Логотип Авито" fill/>
             </div>
-
-            <a className="header__button" href="#" target="_blank" rel="noopener noreferrer">
-              написать на
-              <div className="header__avito-logo">
-                <Image src='/icons/avito-logo.svg' alt="Логотип Авито" fill/>
-              </div>
-            </a>
+          </a>
         </header>
+        <div className="header__shadow"></div>
+      </div>
+
     );
 }

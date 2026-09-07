@@ -12,7 +12,7 @@ export const CATEGORIES_ARRAY = ['Карнавальные', 'Ростовые �
 type Category = typeof CATEGORIES_ARRAY[number];
 export type CategoryFilter = 'Все категории' | Category;
 
-export const SUBCATEGORIES_ARRAY = ['Народные', 'Сказка', 'Герои',  'Злодеи', 'Воин', 'Хеллоуин', 'Готика', 'Веселье', 'Приключения', '80-е и 90-е', 'Диско', 'Великий Гэтсби', 'Новый год', 'Исторические', 'Вечерние' , 'Прочее'] as const;
+export const SUBCATEGORIES_ARRAY = ['Народные', 'Герои', 'Злодеи', 'Хеллоуин', 'Приключения', '80-е и 90-е', 'Диско', 'Великий Гэтсби', 'Новый год', 'Исторические', 'Вечерние', 'Прочее'] as const;
 type Subcategory = typeof SUBCATEGORIES_ARRAY[number];
 export type SubcategoryFilter = 'Все подкатегории' | Subcategory;
 
