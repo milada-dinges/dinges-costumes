@@ -40,7 +40,7 @@
 
   /* Отступы между*/
   --gap-v-block: 40px;
-  --gap-v-group: 24px;
+  --gap-v-group: 20px;
 
   --gap-item: 16px;
   --gap-card: 24px;
@@ -133,6 +133,7 @@ button, a {
   border: 2px solid var(--primary);
   outline: none;
   -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
 }
 
 /*Стили для классов*/
@@ -257,20 +258,21 @@ button, a {
   padding-inline: var(--padd-h-block);
   border: var(--border);
   border-radius: var(--radius-section);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-v-group);
 }
 
 
 
 .catalog {
+
+}
+.catalog__h2 {
   color: var(--primary);
 }
-
 .card__btn{
-  padding-inline: var(--padd-h-btn);
-  padding-block: var(--padd-v-btn);
-  border: 2px solid var(--primary);
-  color: var(--primary);
-  font-size: 2rem;
+
 }
 
 .catalog__grid {
@@ -279,10 +281,21 @@ button, a {
   gap: var(--gap-card);
 }
 
-.catalog__h2 {
-  color: var(--primary);
+.catalog__filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
 }
-.catalog__filters {}
+.category__btn:hover {
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.category__btn__active {
+  background: var(--primary);
+  color: var(--bg);
+}
+.category__btn__active:hover {
+  background: var(--primary);
+}
 .filters__category {
   display: flex;
   flex-direction: row;
@@ -301,11 +314,17 @@ button, a {
   gap: var(--gap-item);
   padding-block: var(--padd-v-item);
   padding-inline: var(--padd-h-item);
-  background: var(--primary-hvr);
+  background: var(--subdued);
   border-radius: var(--radius-card);
 }
-.carnaval__sub-pc {
+.filters__carnaval-dropdown {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: var(--gap-item);
+}
+.carnaval__sub-pc {
+  display: none;
   flex-wrap: wrap;
   flex-direction: row;
   gap: var(--gap-small);
@@ -342,8 +361,8 @@ button, a {
   border: none;
   color: var(--primary);
   background-color: var(--bg);
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -351,29 +370,57 @@ button, a {
   grid-column: 1;
   grid-row: 1;
 
-  display: block;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
   visibility: hidden;
   white-space: nowrap;
 }
 .dropdown-toggle__text {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
   grid-column: 1;
   grid-row: 1;
 }
+.arrow-sub__open {
+  transform: rotate(180deg);
+}
+.arrow-sub__active {
+  fill: var(--bg);
+}
 
+.arrow-gender__open {
+  transform: rotate(180deg);
+}
+.arrow-gender__active {
+  fill: var(--bg);
+}
 
+.arrow-size__open {
+  transform: rotate(180deg);
+}
+.arrow-size__active {
+  fill: var(--bg);
+}
 
 .dropdown__list {
   display: flex;
   flex-direction: column;
-
+  gap: 8px;
+  width: 100%;
   position: absolute;
   top: 100%;
   left: 0;
   margin-top: 4px;
   z-index: 7;
-
+  border: 2px solid var(--bg);
   background: var(--subdued);
   margin: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-bottom-left-radius: var(--radius-card);
   border-bottom-right-radius: var(--radius-card);
 }
@@ -382,4 +429,26 @@ button, a {
   white-space: nowrap;
   width: 100%;
   border: none;
+  padding: 0;
+}
+
+.sub-pc__btn:hover {
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.sub-pc__btn__active {
+  background: var(--primary);
+  color: var(--bg);
+}
+.sub-pc__btn__active:hover {
+  background: var(--primary);
+}
+
+
+@media (min-width: 1200px) {
+  .carnaval__sub {
+    display: none;
+  }
+  .carnaval__sub-pc {
+    display: block;
+  }
 }
