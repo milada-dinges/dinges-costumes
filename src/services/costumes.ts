@@ -9,7 +9,7 @@ const MOCK_COSTUMES: Costume[] = [
         gender: ['Женский'],
         sizes: ['46', '48'],
         pricePerDay: 1400,
-        imageUrl: '/',
+        imageUrl: '/img/pirate.jpg',
         description: 'string',
     }
 ]

@@ -452,3 +452,28 @@ button, a {
     display: block;
   }
 }
+
+.grid {
+  background-color: #754F9B;
+}
+.grid__card {
+  background: var(--accent);
+  height: max-content;
+  width: max-content;
+  padding: var(--padd-card);
+  display: flex;
+  flex-direction: column;
+}
+.card__img-container {
+  background: white;
+  height: 200px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+
+}
+.card__img {
+  object-fit: cover;
+  object-position: center;
+}

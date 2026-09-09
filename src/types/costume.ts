@@ -8,11 +8,11 @@ export const GENDER_ARRAY = ['Женский', 'Мужской'] as const;
 type Gender = typeof GENDER_ARRAY[number];
 export type GenderFilter = 'Пол' | Gender;
 
-export const CATEGORIES_ARRAY = ['Карнавальные', 'Ростовые куклы', 'Ростовые-наудвные'] as const;
+export const CATEGORIES_ARRAY = ['Карнавальные', 'Ростовые куклы', 'Ростовые-надувные'] as const;
 type Category = typeof CATEGORIES_ARRAY[number];
 export type CategoryFilter = 'Все категории' | Category;
 
-export const SUBCATEGORIES_ARRAY = ['Народные', 'Герои', 'Злодеи', 'Хеллоуин', 'Приключения', '80-е и 90-е', 'Диско', 'Великий Гэтсби', 'Новый год', 'Исторические', 'Вечерние', 'Прочее'] as const;
+export const SUBCATEGORIES_ARRAY = ['Народные', '80-е и 90-е', 'Диско', 'Великий Гэтсби', 'Герои', 'Злодеи', 'Исторические', 'Приключения', 'Хеллоуин', 'Новый год', 'Вечерние', 'Прочее'] as const;
 type Subcategory = typeof SUBCATEGORIES_ARRAY[number];
 export type SubcategoryFilter = 'Все подкатегории' | Subcategory;
 
