@@ -45,6 +45,7 @@
   --gap-item: 16px;
   --gap-card: 24px;
   --gap-small: 8px;
+  --gap-card-txt: 4px;
 
   /* Отступы внутрь*/
   --padd-v-block: 40px;
@@ -72,6 +73,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  line-height: 1.2;
 }
 html {
   font-size: 50%;
@@ -96,7 +98,10 @@ h2 {
   font-size: var(--h2);
   color: var(--lite);
 }
-
+h3 {
+  font-size: var(--card-ttl);
+  font-weight: 600;
+}
 img {
   display: block;
   max-width: 100%;
@@ -275,12 +280,6 @@ button, a {
 
 }
 
-.catalog__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--gap-card);
-}
-
 .catalog__filters {
   display: flex;
   flex-direction: column;
@@ -444,25 +443,22 @@ button, a {
 }
 
 
-@media (min-width: 1200px) {
-  .carnaval__sub {
-    display: none;
-  }
-  .carnaval__sub-pc {
-    display: block;
-  }
-}
 
-.grid {
-  background-color: #754F9B;
+.catalog__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-card);
 }
 .grid__card {
   background: var(--accent);
-  height: max-content;
-  width: max-content;
+  height: min-content;
   padding: var(--padd-card);
   display: flex;
   flex-direction: column;
+  gap: var(--gap-item);
+  font-size: var(--small-txt);
+  color: var(--bg);
+  border-radius: var(--radius-card);
 }
 .card__img-container {
   background: white;
@@ -472,8 +468,69 @@ button, a {
   aspect-ratio: 3/4;
   overflow: hidden;
 
+  -webkit-mask-image: 
+  radial-gradient(circle at 0 0, transparent 16px, black 17px),
+  radial-gradient(circle at 0 100%, transparent 16px, black 17px),
+  radial-gradient(circle at 100% 0, transparent 16px, black 17px),
+  radial-gradient(circle at 100% 100%, transparent 16px, black 17px);
+
+  mask-image: 
+  radial-gradient(circle at 0 0, transparent 16px, black 17px),
+  radial-gradient(circle at 0 100%, transparent 16px, black 17px),
+  radial-gradient(circle at 100% 0, transparent 16px, black 17px),
+  radial-gradient(circle at 100% 100%, transparent 16px, black 17px);
+
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.card__text-group {
+  gap: var(--gap-card-txt);
 }
 .card__img {
   object-fit: cover;
   object-position: center;
+}
+.grid__card button{
+  background: var(--bg);
+  font-size: var(--small-txt);
+  border: none;
+  padding-inline: var(--padd-h-small-btn);
+  padding-block: var(--padd-v-small-btn);
+}
+.card__price-numder {
+  font-weight: 600;
+  font-size: var(--card-ttl);
+}
+.card__reservation {
+  width: 100%;
+}
+.card__more {
+  height: 100%;
+  aspect-ratio: 1/1;
+}
+.card__btns {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+@media (min-width: 540px) {
+  .catalog__grid {
+  grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carnaval__sub {
+    display: none;
+  }
+  .carnaval__sub-pc {
+    display: block;
+  }
+  .catalog__grid {
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-card);
+  }
 }

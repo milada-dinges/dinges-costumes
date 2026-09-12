@@ -5,8 +5,6 @@ import Image from "next/image";
 
 import { Costume, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GENDER_ARRAY, GenderFilter, SUBCATEGORIES_ARRAY, SubcategoryFilter } from "@/types/costume";
 
-import arrowDropdown from '../../public/icons/arrow-dropdown.svg'
-
 interface CatalogProps{
     initialCostumes: Costume[];
 }
@@ -42,7 +40,7 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
                         onClick={() => setSelectedCategory(btnName)}>
                             {btnName}
                         </button>
-                        ))
+                        )) 
                     }
                 </div> 
 
@@ -126,34 +124,41 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
                     </div>)
                 }
             </div>
-            <div className="catalog__grid grid">
+            <div className="catalog__grid">
                 {costumes.map((card) => (
                     <div key={card.id} className="grid__card">
                         <div className="card__img-container">
                             <Image className="card__img" src={card.imageUrl} alt={card.title} fill sizes="(max-width: 768px) 100 vw, (max-width:1200px) 50vw, 25vw"></Image>
                         </div>
-                        <div className="card__ttl">
-                            Костюм "{card.title}"
+
+                        <div className="card__text-group">
+                            <h3 className="card__ttl">
+                                Костюм "{card.title}"
+                            </h3>
+
+                            <p className="card__size">
+                                {card.sizes && card.sizes.length > 0 && (
+                                    <>
+                                        Размеры: <span className="bold">{card.sizes[0]}</span>
+                                        {card.sizes[1] && `, ${card.sizes[1]}`}
+                                        {card.sizes[2] && `, ${card.sizes[2]}`}
+                                    </>
+                                )}
+                            </p>
+
+                            <p className="card__price"> 
+                                <span className="card__price-numder">{card.pricePerDay}</span>
+                                <span>₽/сутки</span>
+                            </p>
                         </div>
 
-                        <div className="card__size">
-                            {card.sizes && card.sizes.length > 0 && (
-                                <>
-                                    Размеры: <span className="bold">{card.sizes[0]}</span>
-                                    {card.sizes[1] && `, ${card.sizes[1]}`}
-                                    {card.sizes[2] && `, ${card.sizes[2]}`}
-                                </>
-                            )}
-                        </div>
-                        
-                        <div className="card__price">За сутки: {card.pricePerDay}₽</div>
                         <div className="card__btns">
-                            <div className="card__reservation">
+                            <button className="card__reservation">
                                 Бронь на <Image src='' alt=''></Image>
-                            </div>
-                            <div className="card__more">
+                            </button>
+                            <button className="card__more">
                                 <Image src='' alt=''></Image>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 ))
