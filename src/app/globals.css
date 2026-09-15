@@ -26,7 +26,7 @@
   --bg: #F5FFF3;
   --primary: #754F9B;       
   --primary-hvr: rgb(117 79 155 / 0.3);
-  --accent: #536F43;
+  --accent: #436F46;
   --accent-lt: #C7ED98;
   --lite: #FFFBFB;
   --subdued: #DDDDDD;
@@ -37,6 +37,7 @@
   --main-txt: 2.5rem;  /* 20->14 */
   --card-ttl: 2.25rem;  /* 18->14 */
   --small-txt: 2rem;  /* 16->12 */
+  --tiny-txt: 1.5rem;
 
   /* Отступы между*/
   --gap-v-block: 40px;
@@ -99,9 +100,10 @@ h2 {
   color: var(--lite);
 }
 h3 {
-  font-size: var(--card-ttl);
-  font-weight: 600;
+  font-weight: 400;
+  font-size: var(--small-txt);
 }
+
 img {
   display: block;
   max-width: 100%;
@@ -444,6 +446,14 @@ button, a {
 
 
 
+.bold {
+  font-weight: 600;
+}
+
+
+
+
+
 .catalog__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -451,46 +461,71 @@ button, a {
 }
 .grid__card {
   background: var(--accent);
-  height: min-content;
+  height: auto;
   padding: var(--padd-card);
   display: flex;
   flex-direction: column;
   gap: var(--gap-item);
+  justify-content: space-between;
   font-size: var(--small-txt);
   color: var(--bg);
   border-radius: var(--radius-card);
+
+
+  width: 100%;
+}
+
+.card__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-item);
 }
 .card__img-container {
   background: white;
-  height: 200px;
   position: relative;
   width: 100%;
   aspect-ratio: 3/4;
   overflow: hidden;
 
+  width: 100%;
+
+
   -webkit-mask-image: 
-  radial-gradient(circle at 0 0, transparent 16px, black 17px),
-  radial-gradient(circle at 0 100%, transparent 16px, black 17px),
-  radial-gradient(circle at 100% 0, transparent 16px, black 17px),
-  radial-gradient(circle at 100% 100%, transparent 16px, black 17px);
+  radial-gradient(circle at 0 0, transparent 18px, black 19px),
+  radial-gradient(circle at 0 100%, transparent 18px, black 19px),
+  radial-gradient(circle at 100% 0, transparent 18px, black 19px),
+  radial-gradient(circle at 100% 100%, transparent 18px, black 19px);
 
   mask-image: 
-  radial-gradient(circle at 0 0, transparent 16px, black 17px),
-  radial-gradient(circle at 0 100%, transparent 16px, black 17px),
-  radial-gradient(circle at 100% 0, transparent 16px, black 17px),
-  radial-gradient(circle at 100% 100%, transparent 16px, black 17px);
+  radial-gradient(circle at 0 0, transparent 18px, black 19px),
+  radial-gradient(circle at 0 100%, transparent 18px, black 19px),
+  radial-gradient(circle at 100% 0, transparent 18px, black 19px),
+  radial-gradient(circle at 100% 100%, transparent 18px, black 19px);
 
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
 }
-
-.card__text-group {
-  gap: var(--gap-card-txt);
-}
 .card__img {
   object-fit: cover;
   object-position: center;
+  width: 100%;
+  height: 100%;
 }
+
+
+.card__text-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-card-txt);
+}
+.card__size {
+  color: var(--subdued);
+}
+.card__price {
+  font-size: var(--card-ttl);
+}
+
+
 .grid__card button{
   background: var(--bg);
   font-size: var(--small-txt);
@@ -498,16 +533,12 @@ button, a {
   padding-inline: var(--padd-h-small-btn);
   padding-block: var(--padd-v-small-btn);
 }
-.card__price-numder {
-  font-weight: 600;
-  font-size: var(--card-ttl);
-}
 .card__reservation {
   width: 100%;
 }
-.card__more {
-  height: 100%;
-  aspect-ratio: 1/1;
+.card__more-span {
+  font-size: 20px;
+  font-family: America-XIX;
 }
 .card__btns {
   width: 100%;
@@ -515,6 +546,10 @@ button, a {
   flex-direction: row;
   gap: 8px;
 }
+.card__more {
+  height: 100%;
+}
+
 
 @media (min-width: 540px) {
   .catalog__grid {

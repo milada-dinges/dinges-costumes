@@ -3,14 +3,25 @@ import { Costume } from '../types/costume'
 const MOCK_COSTUMES: Costume[] = [
     {
         id: '1',
-        title: 'Эльза',
+        title: 'Костюм "Пиратка Мини"', 
         category: 'Карнавальные',
-        subcategory: 'Новый год',
+        subcategory: 'Приключения',
         gender: ['Женский'],
         sizes: ['46', '48'],
-        pricePerDay: 1400,
+        pricePerDay: 1200,
         imageUrl: '/img/pirate.jpg',
-        description: 'string',
+        description: null,
+    },
+    {
+        id: '2',
+        title: 'Ростовая кукла "Мишка"',
+        category: 'Ростовые куклы',
+        subcategory: null,
+        gender: null,
+        sizes: null,
+        pricePerDay: 900,
+        imageUrl: '/img/pirate.jpg',
+        description: null,
     }
 ]
 

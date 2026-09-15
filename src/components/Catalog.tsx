@@ -26,6 +26,28 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
     const longSub = subcategoryBtns.reduce((a, b) => a.length > b.length ? a : b);
     const longSize = sizeBtns.reduce((a, b) => a.length > b.length ? a : b);
     const longGender = genderBtns.reduce((a, b) => a.length > b.length ? a : b);
+    
+    function handleCategoryChange(category: CategoryFilter) {
+        setSelectedCategory(category);
+        setSelectedSubcategory('Все подкатегории'); 
+        setSelectedGender('Пол');
+        setSelectedSize('Размер')
+    }
+    
+
+    const filteredCatalog = costumes.filter((card) => {
+        const matchesCategory = selectedCategory === 'Все категории' || card.category === selectedCategory;
+        const matchesSize = selectedCategory !== 'Карнавальные' || selectedSize === 'Размер' || (card.sizes?.includes(selectedSize) ?? false);
+        const matchesGender = selectedCategory !== 'Карнавальные' || selectedGender === 'Пол' || (card.gender?.includes(selectedGender) ?? false);
+        const matchesSub = selectedCategory !== 'Карнавальные' || selectedSubcategory === 'Все подкатегории' || card.subcategory === selectedSubcategory;
+
+        console.log('selectedSize:', JSON.stringify(selectedSize));
+        console.log('card.sizes:', JSON.stringify(card.sizes));
+
+        return matchesCategory && matchesSize && matchesGender && matchesSub}
+    )
+
+
 
     return (
         <section className="catalog section">
@@ -37,7 +59,7 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
                     {categoryBtns.map((btnName) => (
                         <button key={btnName} 
                         className={`category__btn ${selectedCategory === btnName ? 'category__btn__active' : ''}`}
-                        onClick={() => setSelectedCategory(btnName)}>
+                        onClick={() => handleCategoryChange(btnName)}>
                             {btnName}
                         </button>
                         )) 
@@ -51,7 +73,7 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
                                 <button className={`dropdown-toggle u-inline-grid ${selectedSize !== 'Размер' ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'size' ? 'dropdown-toggle__open' : ''}`}
                                 onClick={() => setActiveDropdown(activeDropdown === 'size' ? null : 'size')}>
                                     <span className="dropdown-toggle__text">{selectedSize} <svg className={`arrow-size__close ${selectedSize !== 'Размер' ? 'arrow-size__active' : ''} ${activeDropdown === 'size' ? 'arrow-size__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
-                                    <span className="dropdown-toggle__ghost">{longGender} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
+                                    <span className="dropdown-toggle__ghost">{longSize} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
                                 </button>
                                 {activeDropdown === 'size' && (
                                     <ul className="dropdown__list">
@@ -124,45 +146,49 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
                     </div>)
                 }
             </div>
+
+
+
+
             <div className="catalog__grid">
-                {costumes.map((card) => (
+                {filteredCatalog.map((card) => (
                     <div key={card.id} className="grid__card">
-                        <div className="card__img-container">
-                            <Image className="card__img" src={card.imageUrl} alt={card.title} fill sizes="(max-width: 768px) 100 vw, (max-width:1200px) 50vw, 25vw"></Image>
-                        </div>
-
-                        <div className="card__text-group">
-                            <h3 className="card__ttl">
-                                Костюм "{card.title}"
-                            </h3>
-
-                            <p className="card__size">
-                                {card.sizes && card.sizes.length > 0 && (
-                                    <>
-                                        Размеры: <span className="bold">{card.sizes[0]}</span>
-                                        {card.sizes[1] && `, ${card.sizes[1]}`}
-                                        {card.sizes[2] && `, ${card.sizes[2]}`}
-                                    </>
-                                )}
-                            </p>
+                        <div className="card__top">
+                            <div className="card__img-container">
+                                <Image className="card__img" src={card.imageUrl} alt={card.title} fill sizes="(max-width: 768px) 100vw, (max-width:1200px) 50vw, 25vw"></Image>
+                            </div>
 
                             <p className="card__price"> 
-                                <span className="card__price-numder">{card.pricePerDay}</span>
-                                <span>₽/сутки</span>
+                                Аренда за сутки: <span className="bold">{card.pricePerDay}</span>₽
                             </p>
+
+                            <div className="card__text-group">
+                                <h3>
+                                    {card.title}
+                                </h3>
+
+                                <p className="card__size">
+                                    {card.sizes && card.sizes.length > 0 && (
+                                        <>
+                                            Размеры: <span className="bold">{card.sizes[0]}</span>
+                                            {card.sizes[1] && `, ${card.sizes[1]}`}
+                                            {card.sizes[2] && `, ${card.sizes[2]}`}
+                                        </>
+                                    )}
+                                </p>
+                            </div>
                         </div>
+
+    
 
                         <div className="card__btns">
                             <button className="card__reservation">
-                                Бронь на <Image src='' alt=''></Image>
+                                Бронь на <Image src='/icons/avito-logo-prpl.svg' width={63} height={16} alt='Авито'></Image>
                             </button>
-                            <button className="card__more">
-                                <Image src='' alt=''></Image>
-                            </button>
+                            <button title="Подрбнее о костюме" className="card__more"><span className="card__more-span">i</span></button>
                         </div>
-                    </div>
-                ))
-            }
+                    </div>))
+                }
             </div>
         </section>
     );

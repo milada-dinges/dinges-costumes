@@ -21,10 +21,10 @@ export interface Costume {
   id: string;               
   title: string;            
   category: Category; 
-  subcategory?: Subcategory;     
-  gender?: Gender[];     
-  sizes?: Size[];          
+  subcategory: Subcategory | null;     
+  gender: Gender[] | null;       
+  sizes: Size[] | null;          
   pricePerDay: number;      
   imageUrl: string;         
-  description?: string;     
+  description: string | null;     
 }
