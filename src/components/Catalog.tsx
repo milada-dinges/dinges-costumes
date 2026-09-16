@@ -52,9 +52,9 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
     return (
         <section className="catalog section">
 
-            <h2 className="catalog__h2">Каталог</h2>
-
             <div className="catalog__filters">
+                <h2 className="catalog__h2">Каталог</h2>
+
                 <div className="filters__category">
                     {categoryBtns.map((btnName) => (
                         <button key={btnName} 
@@ -182,10 +182,10 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
     
 
                         <div className="card__btns">
-                            <button className="card__reservation">
+                            <button className="card__reservation card__btn">
                                 Бронь на <Image src='/icons/avito-logo-prpl.svg' width={63} height={16} alt='Авито'></Image>
                             </button>
-                            <button title="Подрбнее о костюме" className="card__more"><span className="card__more-span">i</span></button>
+                            <button className="card__more card__btn" title="Подробнее о костюме"><span className="card__more-span">i</span></button>
                         </div>
                     </div>))
                 }
