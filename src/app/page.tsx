@@ -7,7 +7,7 @@ export default async function Page() {
   const costumes = await getCostumes();
 
   return (
-    <div>
+    <div className="main">
       <Hero/>
       <Catalog initialCostumes={costumes}/>
     </div> 

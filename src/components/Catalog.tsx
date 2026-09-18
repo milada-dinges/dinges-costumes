@@ -1,6 +1,6 @@
-'use client'
+'use client';
 
-import { use, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { Costume, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GENDER_ARRAY, GenderFilter, SUBCATEGORIES_ARRAY, SubcategoryFilter } from "@/types/costume";
@@ -50,10 +50,10 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
 
 
     return (
-        <section className="catalog section">
+        <section className="catalog" id="catalog">
 
             <div className="catalog__filters">
-                <h2 className="catalog__h2">Каталог</h2>
+                <h2 className="catalog__ttl">Каталог</h2>
 
                 <div className="filters__category">
                     {categoryBtns.map((btnName) => (

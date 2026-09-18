@@ -23,7 +23,7 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
       <body>
         <div className="page-wrapper">
           <Header/>
-          <main className="main">{children}</main>
+          <main>{children}</main>
           <Footer/>
         </div>
       </body>
