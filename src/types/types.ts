@@ -18,7 +18,7 @@ export type SubcategoryFilter = 'Все подкатегории' | Subcategory;
 
 
 export interface Costume {
-  id: string;               
+  id: number;               
   title: string;            
   category: Category; 
   subcategory: Subcategory | null;     
@@ -27,4 +27,10 @@ export interface Costume {
   pricePerDay: number;      
   imageUrl: string;         
   description: string | null;     
+}
+
+export interface FAQ {
+  id: number;
+  question: string;
+  answer: string;
 }

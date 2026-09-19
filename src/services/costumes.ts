@@ -1,8 +1,8 @@
-import { Costume } from '../types/costume'
+import { Costume } from '../types/types'
 
 const MOCK_COSTUMES: Costume[] = [
     {
-        id: '1',
+        id: 2010646,
         title: 'Костюм "Пиратка Мини"', 
         category: 'Карнавальные',
         subcategory: 'Приключения',
@@ -13,7 +13,7 @@ const MOCK_COSTUMES: Costume[] = [
         description: null,
     },
     {
-        id: '2',
+        id: 3020360,
         title: 'Ростовая кукла "Мишка"',
         category: 'Ростовые куклы',
         subcategory: null,
