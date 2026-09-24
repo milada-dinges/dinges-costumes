@@ -6,7 +6,7 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <div className="hero-info section">
+      <div className="hero-info">
         <div className="hero-info__content">
           <div className="hero-info__top">
             <h1 className="hero-info__ttl">Аренда костюмов и&nbsp;ростовых кукол в&nbsp;Барнауле</h1>
@@ -20,7 +20,7 @@ export default function Hero() {
                 <Image className="point__icon" src='/icons/stars.svg' width={17} height={17} alt=""/>
               </div>
               <div className="point__text-container">
-                <p className="point__text">чистота и&nbsp;честные цены</p>
+                <p className="point__text">чистота и&nbsp;честные&nbsp;цены</p>
               </div>
             </div>
 
@@ -56,9 +56,11 @@ export default function Hero() {
       </div>
 
 
-      <div className="hero-photo section">
+      <div className="hero-photo">
         <Image className="hero-photo__stars-top" src='/icons/stars-fairy.svg' width={53} height={53} alt=""/>
-        <Image className="hero-photo__photo" src='/img/fairy.png' width={375} height={666} alt=""/>
+        <div className="hero-photo__photo-container"> 
+          <Image className="hero-photo__photo" src='/img/fairy.png' width={375} height={666} alt=""/>
+        </div>
         <Image className="hero-photo__stars-bottom" src='/icons/stars-fairy.svg' width={53} height={53} alt=""/>
       </div>
     </section>

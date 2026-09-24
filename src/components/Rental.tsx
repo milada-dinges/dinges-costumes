@@ -16,7 +16,7 @@ export default function Rental({questions}: rentalPops) {
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
 
   return (
-    <section className="rental-terms section">
+    <section className="rental-terms section" id="rental-terms">
       <h2>Условия аренды</h2>
       <div className="rental-terms__group">
         {questions.map((q) => (

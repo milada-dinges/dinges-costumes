@@ -1,13 +1,12 @@
-import Link from "next/link";
 import Image from "next/image";
 
 export default function Header() {
     return(
       <div className="header__group">
         <header className="header">
-          <Link className="header__button" href="#rentalterms">
+          <a className="header__button" href="#rental-terms">
             условия аренды
-          </Link>
+          </a>
 
           <div className="header__logo">
             <Image src='/icons/logo.svg' fill
