@@ -9,8 +9,8 @@ export default function Hero() {
       <div className="hero-info">
         <div className="hero-info__content">
           <div className="hero-info__top">
-            <h1 className="hero-info__ttl">Аренда костюмов и&nbsp;ростовых кукол в&nbsp;Барнауле</h1>
-            <p className="hero-info__desc">Создайте незабываемую атмосферу на&nbsp;празднике или корпоративе!</p>
+            <h1 className="hero-info__ttl">Аренда костюмов<br />в&nbsp;Барнауле!</h1>
+            <p className="hero-info__desc">{'Создайте незабываемую атмосферу\nна\u00A0празднике!'}</p>
           </div>
 
           <div className="hero-info__points">
@@ -20,7 +20,7 @@ export default function Hero() {
                 <Image className="point__icon" src='/icons/stars.svg' width={17} height={17} alt=""/>
               </div>
               <div className="point__text-container">
-                <p className="point__text">чистота и&nbsp;честные&nbsp;цены</p>
+                <p className="point__text">чистота<br />и&nbsp;честные&nbsp;цены</p>
               </div>
             </div>
 
@@ -29,7 +29,7 @@ export default function Hero() {
                 <Image className="point__icon" src='/icons/pig.svg' width={20} height={18} alt=""/>
               </div>
               <div className="point__text-container">
-                <p className="point__text">работаем без&nbsp;залога</p>
+                <p className="point__text">работаем<br />без&nbsp;залога</p>
               </div>
             </div>
 
@@ -38,13 +38,11 @@ export default function Hero() {
                 <Image className="point__icon" src='/icons/agreement.svg' width={17} height={18} alt=""/>
               </div>
               <div className="point__text-container">
-                <p className="point__text">для договора только&nbsp;паспорт</p>
+                <p className="point__text point__text-3">{'для\u00A0договора\nтолько\u00A0паспорт'}</p>
               </div>
             </div>
 
           </div>
-
-          <p className="hero-info__desc">Ждем вас на&nbsp;примерку по&nbsp;предварительной записи!</p>
         </div>
 
         <a className="hero-info__to-calatog" href='#catalog'>
