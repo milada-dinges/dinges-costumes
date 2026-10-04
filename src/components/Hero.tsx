@@ -57,7 +57,7 @@ export default function Hero() {
       <div className="hero-photo">
         <Image className="hero-photo__stars-top" src='/icons/stars-fairy.svg' width={53} height={53} alt=""/>
         <div className="hero-photo__photo-container"> 
-          <Image className="hero-photo__photo" src='/img/fairy.png' width={375} height={666} alt=""/>
+          <Image className="hero-photo__photo" src='/img/fairy-pc.png' width={375} height={666} alt=""/>
         </div>
         <Image className="hero-photo__stars-bottom" src='/icons/stars-fairy.svg' width={53} height={53} alt=""/>
       </div>

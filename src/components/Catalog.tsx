@@ -183,7 +183,7 @@ export default function Catalog({ initialCostumes }: CatalogProps) {
 
                         <div className="card__btns">
                             <button className="card__reservation card__btn">
-                                Бронь на <Image src='/icons/avito-logo-prpl.svg' width={63} height={16} alt='Авито'></Image>
+                                Бронь на <Image src='/icons/avito-logo-lite.svg' width={18} height={18} alt='Авито'></Image>
                             </button>
                             <button className="card__more card__btn" title="Подробнее о костюме"><span className="card__more-span">i</span></button>
                         </div>
