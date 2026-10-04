@@ -1,6 +1,6 @@
-import { Costume } from '../types/types'
+import { Costume } from '../types'
 
-const MOCK_COSTUMES: Costume[] = [
+const MOCK_COSTUMES = [
     {
         id: 2010646,
         title: 'Костюм "Пиратка Мини"', 
@@ -25,8 +25,25 @@ const MOCK_COSTUMES: Costume[] = [
     }
 ]
 
+const responseToCostume = (raw: any): Costume => {
+    return {
+        id: String(raw.id),               
+        title: raw.title,            
+        category: raw.category, 
+        subcategory: raw.subcategory ?? 'Прочее',     
+        gender: Array.isArray(raw.gender) ? raw.gender : (raw.gender ? [raw.gender] : []),       
+        sizes: Array.isArray(raw.sizes) ? raw.sizes : (raw.sizes ? [raw.sizes] : []),       
+        pricePerDay: raw.pricePerDay,      
+        imageUrl: raw.imageUrl,     
+        description: raw.description ?? '', 
+    }
+}
+
 export async function getCostumes(): Promise<Costume[]> {
     return new Promise((resolve) => {
-        resolve(MOCK_COSTUMES)
+        setTimeout(() => {
+            const cleanData = MOCK_COSTUMES.map(responseToCostume);
+            resolve(cleanData);
+        }, 300)
     });
 } 

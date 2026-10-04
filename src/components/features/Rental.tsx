@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { FAQ } from "../types/types"
+import { FAQ } from "../../types"
 
 import Image from "next/image";
 
