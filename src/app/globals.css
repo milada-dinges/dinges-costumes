@@ -1036,8 +1036,8 @@ button, a {
   }
   
   .hero {
-    min-height: 50vh;
-    min-height: 50dvh;
+    min-height: 66vh;
+    min-height: 66dvh;
     max-height: min-content;
   }
   .hero-info {
