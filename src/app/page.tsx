@@ -1,5 +1,5 @@
 import Hero from '../components/sections/Hero'
-import Catalog from '../components/features/Catalog'
+import { Catalog } from '../components/features/Catalog'
 import Rental from '@/components/features/Rental'
 
 import { getCostumes } from '@/services/costumes'

@@ -8,7 +8,6 @@ interface CartState {
     removeFromCart: (id: Costume['id']) => void;
     openCart: () => void;
     closeCart: () => void;
-    clearCart: () => void;
 }
 
 export const useCartStore = create<CartState>((set) => ({
@@ -25,5 +24,4 @@ export const useCartStore = create<CartState>((set) => ({
     })),
     openCart: () => set({ isCartOpen: true }),
     closeCart: () => set({ isCartOpen: false }),
-    clearCart: () => set({ cart: [] }),
 }));
