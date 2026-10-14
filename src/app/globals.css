@@ -37,9 +37,10 @@ img {
   max-width: 100%;
   height: auto;
 }
-input, button, textarea, select, a {
+input, button, textarea, select, a, label {
   font: inherit;
   color: inherit;
+  display: block;
 }
 .u-inline-grid {
   display: inline-grid !important;
@@ -833,6 +834,8 @@ button, a {
 }
 
 .cart {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -862,6 +865,11 @@ button, a {
   position: relative;
   width: 40px;
   height: 60px;
+}
+.cart__btn-close {
+  padding: 8px;
+  border-radius: 50%;
+  margin-left: auto;
 }
 @media (min-width: 768px) {
   /* Переменные */
