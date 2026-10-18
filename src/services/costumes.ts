@@ -1,29 +1,5 @@
 import { Costume } from '../types'
-
-const MOCK_COSTUMES = [
-    {
-        id: 2010646,
-        title: 'Костюм "Пиратка Мини"', 
-        category: 'Карнавальные',
-        subcategory: 'Приключения',
-        gender: ['Женский'],
-        sizes: ['46', '48'],
-        pricePerDay: 1200,
-        imageUrl: '/img/pirate.jpg',
-        description: null,
-    },
-    {
-        id: 3020360,
-        title: 'Ростовая кукла "Мишка"',
-        category: 'Ростовые куклы',
-        subcategory: null,
-        gender: null,
-        sizes: null,
-        pricePerDay: 900,
-        imageUrl: '/img/pirate.jpg',
-        description: null,
-    }
-]
+import { supabase } from './supabase';
 
 const responseToCostume = (raw: any): Costume => {
     return {
@@ -40,10 +16,15 @@ const responseToCostume = (raw: any): Costume => {
 }
 
 export async function getCostumes(): Promise<Costume[]> {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            const cleanData = MOCK_COSTUMES.map(responseToCostume);
-            resolve(cleanData);
-        }, 300)
-    });
+    const { data, error } = await supabase
+    .from('costumes')
+    .select('*');
+
+    console.log('СЫРЫЕ ДАННЫЕ ИЗ БАЗЫ:', { data, error, errorMessage: error?.message });
+
+    if (error) {
+        console.error('ошибка получения данных', error);
+        return [];
+    }
+    return (data || []).map(responseToCostume);
 } 
