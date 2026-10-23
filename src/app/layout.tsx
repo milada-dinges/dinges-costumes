@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
 
-import { Header } from '../components/layout/Header'
-import Footer from '../components/layout/Footer'
-import { CartModal } from "@/components/layout/CartModal";
-
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,10 +19,7 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
     <html lang="ru">
       <body>
         <div className="page-wrapper">
-          <Header/>
-          <main>{children}</main>
-          <Footer/>
-          <CartModal/>
+          {children}
         </div>
       </body>
     </html>

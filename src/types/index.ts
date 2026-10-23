@@ -29,6 +29,17 @@ export interface Costume {
   description: string;     
 }
 
+export interface NewCostumeForm {            
+  title: string;            
+  category: Category; 
+  subcategory?: Subcategory;    
+  gender: Gender[];
+  sizes: Size[];          
+  pricePerDay: number;      
+  imageUrl: string;     
+  description: string;     
+}
+
 export interface FAQ {
   id: number;
   question: string;
