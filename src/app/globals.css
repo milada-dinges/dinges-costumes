@@ -215,8 +215,7 @@ button, a {
   color: var(--lite);
   aspect-ratio: 1/1;
   display: flex;
-  align-items: center;
-  justify-content: center;
+
 
   padding: 0;
 }
@@ -333,9 +332,6 @@ button, a {
   -webkit-mask-image: radial-gradient(circle 20px at 50% 0px, transparent 0px, transparent 18px, rgba(0, 0, 0, 0.1) 19px, #fff 21px);
   mask-image: radial-gradient(circle 20px at 50% 0px, transparent 0px, transparent 18px, rgba(0, 0, 0, 0.1) 19px, #fff 21px);
 }
-
-
-
 
 .point__icon-container {
   position: absolute;
@@ -499,11 +495,6 @@ button, a {
   width: max-content;
   border: none;
   background-color: var(--lite);
-
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
 }
 .dropdown-toggle__open {
   border: none;
@@ -695,9 +686,6 @@ button, a {
   gap: 8px;
 }
 
-
-
-
 /* Вопрос ответ*/
 .rental-terms {
   background: var(--primary);
@@ -833,6 +821,7 @@ button, a {
   align-items: center;
 }
 
+/*Корзина*/
 .cart {
   display: flex;
   flex-direction: column;
@@ -857,7 +846,7 @@ button, a {
 .cart__costume {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr 2fr 1fr;
-  grid-auto-rows: 1fr;
+  grid-auto-rows: auto;
   text-align: left;
   place-items: center;
 }
@@ -870,6 +859,85 @@ button, a {
   padding: 8px;
   border-radius: 50%;
   margin-left: auto;
+}
+
+/*АДМИНКА*/
+.admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+.admin__form{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.container {
+  margin-bottom: 40px;
+  margin-top: 40px;
+  background: color-mix(in srgb, var(--primary) 30%, var(--lite));
+  padding: 20px;
+  border-radius: 40px;
+}
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dashboard__h2 {
+  color: var(--primary);
+}
+.add-form__desc {
+  font-size: var(--small-txt);
+}
+.admin__input {
+  max-width: 450px;
+  border-radius: var(--radius-btn);
+  padding: 16px;
+  border: 2px solid var(--primary);
+}
+.add-form__textarea {
+  max-width: 450px;
+  border-radius: 20px;
+  padding: 16px;
+  border: 2px solid var(--primary);
+  resize: vertical;
+}
+.add-btn {
+  border: none;
+  background-color: var(--lite);
+}
+.delete-table {
+  border-collapse: collapse;
+}
+.delete-table__tbody {
+  background: white;
+}
+.delete-table__tbody tr:hover {
+  background: color-mix(in srgb, var(--primary) 10%, var(--lite));
+}
+.add-form label span{
+  font-size: var(--small-txt);
+}
+.tbody__td-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete-table td, .delete-table th{
+  border: 2px solid var(--primary);
+  padding-inline: 8px;
+}
+.delete-table img {
+  height: 90px;
+}
+.admin__btn:hover {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
+}
+.admin__btn:active {
+  background: color-mix(in srgb, var(--primary) 40%, transparent);
 }
 @media (min-width: 768px) {
   /* Переменные */
@@ -1045,10 +1113,6 @@ button, a {
     --padd-item: 16px;
 
   }
-  .header__button{
-
-  }
-  
   .hero {
     min-height: 66vh;
     min-height: 66dvh;

@@ -18,7 +18,8 @@ const responseToCostume = (raw: any): Costume => {
 export async function getCostumes(): Promise<Costume[]> {
     const { data, error } = await supabase
     .from('costumes')
-    .select('*');
+    .select('*')
+    .order('id', {ascending: false});
 
     console.log('СЫРЫЕ ДАННЫЕ ИЗ БАЗЫ:', { data, error, errorMessage: error?.message });
 

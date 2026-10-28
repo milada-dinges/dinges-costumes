@@ -18,22 +18,11 @@ export type SubcategoryFilter = 'Все подкатегории' | Subcategory;
 
 
 export interface Costume {
-  id: string;               
+  id?: string;               
   title: string;            
   category: Category; 
-  subcategory?: Subcategory;     
+  subcategory: Subcategory;     
   gender: Gender[];       
-  sizes: Size[];          
-  pricePerDay: number;      
-  imageUrl: string;     
-  description: string;     
-}
-
-export interface NewCostumeForm {            
-  title: string;            
-  category: Category; 
-  subcategory?: Subcategory;    
-  gender: Gender[];
   sizes: Size[];          
   pricePerDay: number;      
   imageUrl: string;     
