@@ -259,100 +259,106 @@ export default function Dashboard () {
                     </label>
                     <input className="add-form__input-file" id="imageUrl" type="file" onChange={handleFileChange}/>
 
-                    <label htmlFor="category">
-                        Категория*
-                    </label>
-                    <div className="dropdown">
-                        <button className={`add-btn dropdown__toggle u-inline-grid ${form.category !== '' as any ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'cat' ? 'dropdown-toggle__open' : ''}`} type="button" onClick = {() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}>
-                            <span className="dropdown-toggle__text">{form.category ? form.category : 'Не выбрана'}</span>
-                            <span className="dropdown-toggle__ghost">{CATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                        </button>
-                        {activeDropdown === 'cat' && (
-                            <ul className="dropdown__list" id="category">
-                                {CATEGORIES_ARRAY.map((item) => (
-                                <li className="dropdown__item" key={item} >
-                                    <button className='dropdown__btn' 
-                                    onClick={() => {setForm({...form, category: item}); setActiveDropdown(null)}}>
-                                        {item}
-                                    </button>
-                                </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                    <div className="group-dropdowns">
+                        <div className="group-dropdown">
+                            <label htmlFor="category">
+                                Категория*
+                            </label>
+                            <div className="dropdown">
+                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'cat' ? 'dropdown-toggle__open' : ''}`} type="button" onClick = {() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}>
+                                    <span className="dropdown-toggle__text">{form.category ? form.category : 'Не выбрана'}</span>
+                                    <span className="dropdown-toggle__ghost">{CATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
+                                </button>
+                                {activeDropdown === 'cat' && (
+                                    <ul className="dropdown__list" id="category">
+                                        {CATEGORIES_ARRAY.map((item) => (
+                                        <li className="dropdown__item" key={item} >
+                                            <button className='dropdown__btn' 
+                                            onClick={() => {setForm({...form, category: item}); setActiveDropdown(null)}}>
+                                                {item}
+                                            </button>
+                                        </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
 
-                    <label htmlFor="subcategory">
-                        Подкатегория**
-                    </label>
-                    <div className="dropdown">
-                        <button className={`add-btn dropdown__toggle u-inline-grid ${form.category !== '' as any ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'sub' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}>
-                            <span className="dropdown-toggle__text">{form.subcategory ? form.subcategory : 'Не выбрана'}</span>
-                            <span className="dropdown-toggle__ghost">{SUBCATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                        </button>
-                        {activeDropdown === 'sub' && (
-                            <ul className="dropdown__list" id="subcategory">
-                                {SUBCATEGORIES_ARRAY.map((item) => (
-                                <li className="dropdown__item" key={item} onClick={() => {setForm({...form, subcategory: item}); setActiveDropdown(null)}}>
-                                    <button className='dropdown__btn' 
-                                    onClick={() => {setForm({...form, subcategory: item}); setActiveDropdown(null)}}>
-                                        {item}
-                                    </button>
-                                </li>
-                                ))}
-                            </ul>
-                        )}
+                        <div className="group-dropdown">
+                            <label htmlFor="subcategory">
+                                Подкатегория**
+                            </label>
+                            <div className="dropdown">
+                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'sub' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}>
+                                    <span className="dropdown-toggle__text">{form.subcategory ? form.subcategory : 'Не выбрана'}</span>
+                                    <span className="dropdown-toggle__ghost">{SUBCATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
+                                </button>
+                                {activeDropdown === 'sub' && (
+                                    <ul className="dropdown__list" id="subcategory">
+                                        {SUBCATEGORIES_ARRAY.map((item) => (
+                                        <li className="dropdown__item" key={item} onClick={() => {setForm({...form, subcategory: item}); setActiveDropdown(null)}}>
+                                            <button className='dropdown__btn' 
+                                            onClick={() => {setForm({...form, subcategory: item}); setActiveDropdown(null)}}>
+                                                {item}
+                                            </button>
+                                        </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
+                        
+                        <div className="group-dropdown">
+                            <label htmlFor="sizes">
+                                Размер**
+                            </label>
+                            <div className="dropdown" id="sizes">
+                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'sizes' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'sizes' ? null : 'sizes')}>
+                                    <span className="dropdown-toggle__text">{form.sizes.length !== 0 ? `Выбарно размеров: ${form.sizes.length}` : 'Не выбран'}</span>
+                                    <span className="dropdown-toggle__ghost">{SIZE_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
+                                </button>
+                                {activeDropdown === 'sizes' && (
+                                    <ul className="dropdown__list">
+                                        {SIZE_ARRAY.map((item) => (
+                                        <li className="dropdown__item" key={item}>
+                                            <button className='dropdown__btn' 
+                                            onClick = {() => handleToggleArray('sizes', item)}>
+                                                {item}
+                                            </button>
+                                        </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
 
-                    </div>
-                    
-
-                    <label htmlFor="sizes">
-                        Размер**
-                        (Если костюм тянется ему можно выбрать нсеколько размеров)
-                    </label>
-                    <div className="dropdown" id="sizes">
-                        <button className={`add-btn dropdown__toggle u-inline-grid ${form.category !== '' as any ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'sizes' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'sizes' ? null : 'sizes')}>
-                            <span className="dropdown-toggle__text">{form.sizes.length !== 0 ? `Выбарно размеров: ${form.sizes.length}` : 'Не выбран'}</span>
-                            <span className="dropdown-toggle__ghost">{SIZE_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                        </button>
-                        {activeDropdown === 'sizes' && (
-                            <ul className="dropdown__list">
-                                {SIZE_ARRAY.map((item) => (
-                                <li className="dropdown__item" key={item}>
-                                    <button className='dropdown__btn' 
-                                    onClick = {() => handleToggleArray('sizes', item)}>
-                                        {item}
-                                    </button>
-                                </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
-
-                    <label htmlFor="gender">
-                        Пол**
-                        (Если унисекс - выберите сразу два пола)
-                    </label>
-                    <div className="dropdown" id="gender">
-                        <button className={`add-btn dropdown__toggle u-inline-grid ${form.category !== '' as any ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'gender' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}>
-                            <span className="dropdown-toggle__text">
-                                {form.gender.length === 0 && 'Не выбран'}
-                                {form.gender.length === 1 && `${form.gender}`}
-                                {form.gender.length === 2 && 'Унисекс'}
-                            </span>
-                            <span className="dropdown-toggle__ghost">{GENDER_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                        </button>
-                        {activeDropdown === 'gender' && (
-                            <ul className="dropdown__list">
-                                {GENDER_ARRAY.map((item) => (
-                                    <li className="dropdown__item" key={item}>
-                                        <button className='dropdown__btn' 
-                                        onClick = {() => handleToggleArray('gender', item)}>
-                                            {item}
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                        <div className="group-dropdown">
+                            <label htmlFor="gender">
+                                Пол**
+                            </label>
+                            <div className="dropdown" id="gender">
+                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'gender' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}>
+                                    <span className="dropdown-toggle__text">
+                                        {form.gender.length === 0 && 'Не выбран'}
+                                        {form.gender.length === 1 && `${form.gender}`}
+                                        {form.gender.length === 2 && 'Унисекс'}
+                                    </span>
+                                    <span className="dropdown-toggle__ghost">{GENDER_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
+                                </button>
+                                {activeDropdown === 'gender' && (
+                                    <ul className="dropdown__list">
+                                        {GENDER_ARRAY.map((item) => (
+                                            <li className="dropdown__item" key={item}>
+                                                <button className='dropdown__btn' 
+                                                onClick = {() => handleToggleArray('gender', item)}>
+                                                    {item}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
                     </div>
 
                     <label htmlFor="description">

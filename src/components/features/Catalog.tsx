@@ -76,9 +76,9 @@ export const Catalog = ({ initialCostumes }: CatalogProps) => {
                     <div className="filters__carnaval">
                         <div className="filters__carnaval-dropdown">
                             <div className="carnaval__size dropdown">
-                                <button className={`dropdown-toggle u-inline-grid ${selectedSize !== 'Размер' ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'size' ? 'dropdown-toggle__open' : ''}`}
+                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'size' ? 'dropdown-toggle__open' : ''}`}
                                 onClick={() => setActiveDropdown(activeDropdown === 'size' ? null : 'size')}>
-                                    <span className="dropdown-toggle__text">{selectedSize} <svg className={`arrow-size__close ${selectedSize !== 'Размер' ? 'arrow-size__active' : ''} ${activeDropdown === 'size' ? 'arrow-size__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
+                                    <span className="dropdown-toggle__text">{selectedSize} <svg className={`arrow ${activeDropdown === 'size' ? 'arrow__open' : ''}`}  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/></svg> </span>
                                     <span className="dropdown-toggle__ghost">{longSize} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
                                 </button>
                                 {activeDropdown === 'size' && (
@@ -96,9 +96,9 @@ export const Catalog = ({ initialCostumes }: CatalogProps) => {
                             </div>  
 
                             <div className="carnaval__gender dropdown">
-                                <button className={`dropdown-toggle u-inline-grid ${selectedGender !== 'Пол' ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'gender' ? 'dropdown-toggle__open' : ''}`}
+                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'gender' ? 'dropdown-toggle__open' : ''}`}
                                 onClick={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}>
-                                    <span className="dropdown-toggle__text">{selectedGender} <svg className={`arrow-gender__close ${selectedGender !== 'Пол' ? 'arrow-gender__active' : ''} ${activeDropdown === 'gender' ? 'arrow-gender__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
+                                    <span className="dropdown-toggle__text">{selectedGender} <svg className={`arrow ${activeDropdown === 'gender' ? 'arrow__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
                                     <span className="dropdown-toggle__ghost">{longGender} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
                                 </button>
                                 {activeDropdown === 'gender' && (
@@ -116,9 +116,9 @@ export const Catalog = ({ initialCostumes }: CatalogProps) => {
                             </div>                       
                             
                             <div className="carnaval__sub dropdown">
-                                <button className={`dropdown-toggle u-inline-grid ${selectedSubcategory !== 'Все подкатегории' ? 'dropdown-toggle__active' : ''} ${activeDropdown === 'sub' ? 'dropdown-toggle__open' : ''}`}
+                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'sub' ? 'dropdown-toggle__open' : ''}`}
                                 onClick={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}>
-                                    <span className="dropdown-toggle__text">{selectedSubcategory} <svg className={`arrow-sub__close ${selectedSubcategory !== 'Все подкатегории' ? 'arrow-sub__active' : ''} ${activeDropdown === 'sub' ? 'arrow-sub__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
+                                    <span className="dropdown-toggle__text">{selectedSubcategory} <svg className={`arrow ${activeDropdown === 'sub' ? 'arrow__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
                                     <span className="dropdown-toggle__ghost">{longSub} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
                                 </button>
                                 {activeDropdown === 'sub' && (
@@ -146,9 +146,6 @@ export const Catalog = ({ initialCostumes }: CatalogProps) => {
                             </button>))
                         }
                         </div>
-
-                        
-                        
                     </div>)
                 }
             </div>

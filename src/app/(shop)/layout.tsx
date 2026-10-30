@@ -10,8 +10,9 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
           <Header/>
           <main>{children}</main>
           <Footer/>
-          <CartModal/>
         </div>
+
+        <CartModal/>
       </body>
     </html>
   );

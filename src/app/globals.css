@@ -78,7 +78,7 @@ ul, ol {
   --black: #0C0C0C;
   --primary: #754F9B;       
   --primary-hvr: rgb(117 79 155 / 0.3);
-  --accent: #436F46;
+  --accent: #227f5a;
   --accent-lite: #B9E089;
   --lite: #FFFBFB;
   --subdued: #DDDDDD;
@@ -123,12 +123,22 @@ ul, ol {
 
   /* Прочее */
   --header: 60px; /* 60->80 */
+  --header-shadow: 32px;
   --gap-header: 32px; /* 32->48 */
   --icon-container: 32px;
   --padd-item: 8px;
 }
 
 /*Стили для тегов*/
+input {
+  max-width: 450px;
+  border-radius: var(--radius-btn);
+  padding-inline: var(--padd-h-btn);
+  padding-block: var(--padd-v-btn);
+  background: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
 button, a {
   padding-inline: var(--padd-h-btn);
   padding-block: var(--padd-v-btn);
@@ -145,9 +155,26 @@ button, a {
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
   text-decoration: none;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
 }
 
 /*Стили для классов*/
+.round-btn {
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  display: flex;
+  padding: 0;
+}
+.button:hover {
+  background: color-mix(in srgb, var(--black) 20%, transparent);
+}
+.button:active {
+  background: color-mix(in srgb, var(--black) 40%, transparent);
+}
+
 .page-wrapper{
   max-width: 1200px;
   width: 100%;
@@ -162,6 +189,7 @@ button, a {
   flex-direction: column;
   gap: var(--gap-v-block);
   margin-bottom: var(--gap-v-block);
+  margin-top: calc(-1 * var(--header));
 }
 .section {
   padding-block: var(--padd-v-block);
@@ -177,8 +205,7 @@ button, a {
 }
 
 /*Шапка*/
-.header__group {
-  max-height: 80px;
+.header-container {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -192,39 +219,32 @@ button, a {
   align-items: stretch;
   border-bottom-left-radius: var(--radius-section);
   border-bottom-right-radius: var(--radius-section);
-  z-index: 10;
   height: var(--header);
 }
-.header__shadow {
+.header::before {
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: calc(var(--header) + 4px);
+  inset: 0 0 auto 0;
+  height: calc(var(--header) + var(--header-shadow));
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.6),
     rgba(0, 0, 0, 0)
   );
   pointer-events: none;
-  z-index: -10;
+  z-index: -1;
+}
+.header__shadow {
+  height: calc(var(--header) + 32px);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0)
+  );
+  pointer-events: none;
 }
 .header__button{
   border: 2px solid var(--lite);
-  border-radius: 50%;
-  color: var(--lite);
-  aspect-ratio: 1/1;
-  display: flex;
-
-
-  padding: 0;
-}
-
-.header__button:hover {
-  background: color-mix(in srgb, var(--black) 20%, transparent);
-}
-.header__button:active {
-  background: color-mix(in srgb, var(--black) 40%, transparent);
 }
 .header__logo {
   position: absolute;
@@ -232,6 +252,7 @@ button, a {
   top: var(--padd-v-header);
   transform: translate(-50%, 0);
   height: calc(var(--header) - calc(var(--padd-v-header) * 2));
+  z-index: 101;
 }
 .header__logo svg{
   width: 100%;
@@ -249,21 +270,17 @@ button, a {
   min-height: 100vh;
   min-height: 100dvh;
   overflow: hidden;
-
   gap: var(--gap-card);
-  margin-top: calc(-1 * var(--header));
   align-items: stretch;
   align-content: stretch;
 }
 .hero-info {
   flex: 7 1 0%;
   position: relative;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--gap-v-group);
-
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: var(--radius-section);
@@ -433,16 +450,20 @@ button, a {
   display: flex;
   flex-direction: row;
   gap: var(--gap-item);
-  overflow-x: auto; 
   flex-wrap: nowrap; 
 
   -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+
+  overflow-x: auto;
+  padding-block: 12px;
+  margin-block: -12px;
+  scrollbar-width: none;
 }
 .filters__category::-webkit-scrollbar {
   display: none;
 }
-
 .category__btn {
   color: var(--lite);
   border: 2px solid var(--lite);
@@ -545,24 +566,10 @@ button, a {
   border: none;
   padding: 0;
   color: var(--subdued);
+  box-shadow: none;
 }
-.arrow-sub__open {
+.arrow__open {
   transform: rotate(180deg);
-}
-.arrow-sub__active {
-  fill: var(--lite);
-}
-.arrow-gender__open {
-  transform: rotate(180deg);
-}
-.arrow-gender__active {
-  fill: var(--lite);
-}
-.arrow-size__open {
-  transform: rotate(180deg);
-}
-.arrow-size__active {
-  fill: var(--lite);
 }
 
 /*подкатегории пк*/
@@ -619,7 +626,6 @@ button, a {
   position: relative;
   width: 100%;
   aspect-ratio: 3/4;
-  overflow: hidden;
 
   -webkit-mask-image: 
   radial-gradient(circle at 0 0, transparent 18px, black 19px),
@@ -720,6 +726,8 @@ button, a {
   text-align: left;
   padding-inline: var(--padd-h-btn);
   padding-block: var(--padd-v-btn);
+
+    box-shadow: none; 
 }
 .rental-terms__btn__active {
   border-top-left-radius: calc(var(--radius-btn) - 2px);
@@ -822,6 +830,16 @@ button, a {
 }
 
 /*Корзина*/
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  background: color-mix(in srgb, var(--black) 50%, transparent); 
+  backdrop-filter: blur(2px);
+}
 .cart {
   display: flex;
   flex-direction: column;
@@ -829,36 +847,135 @@ button, a {
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
-  z-index: 1000;
-  background-color: var(--lite);
-  color: #DDDDDD;
-  height: 85vh;
-  width: 90%;
-  max-width: 800px;
-
-  overflow-y: scroll;
+  z-index: 10001;
+  background: var(--accent);
   padding-inline: var(--padd-h-block);
   padding-block: var(--padd-v-block);
+  gap: var(--gap-item);
+  height: 85vh;
+  height: 85dvh;
+  width: 90vw;
+  width: 90dvw;
+  max-width: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+
+
+  border: 3px solid var(--lite);
+  -webkit-mask-image: 
+    radial-gradient(circle at 0 0, transparent 27px, black 28px),
+    radial-gradient(circle at 0 100%, transparent 27px, black 28px),
+    radial-gradient(circle at 100% 0, transparent 27px, black 28px),
+    radial-gradient(circle at 100% 100%, transparent 27px, black 28px);
+  mask-image: 
+    radial-gradient(circle at 0 0, transparent 27px, black 28px),
+    radial-gradient(circle at 0 100%, transparent 27px, black 28px),
+    radial-gradient(circle at 100% 0, transparent 27px, black 28px),
+    radial-gradient(circle at 100% 100%, transparent 27px, black 28px);
+
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  
+  background:
+    radial-gradient(circle at 0 0, transparent 24px, var(--lite) 24.5px, var(--lite) 27px, #1c825b 27.5px) top left,
+    radial-gradient(circle at 100% 0, transparent 24px, var(--lite) 24.5px, var(--lite) 27px, #1c825b 27.5px) top right,
+    radial-gradient(circle at 0 100%, transparent 24px, var(--lite) 24.5px, var(--lite) 27px, #1c825b 27.5px) bottom left,
+    radial-gradient(circle at 100% 100%, transparent 24px, var(--lite) 24.5px, var(--lite) 27px, #1c825b 27.5px) bottom right;
+  background-size: 51% 51%;
+  background-repeat: no-repeat;
+}
+.cart__rental-questions label {
+  color: var(--lite);
+}
+.cart__btn-close, .cart__btn-del {
+  max-width: min-content;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 .cart__btn-close {
-  color: #DDDDDD;
+  margin-left: 50%;
+    transform: translateX(-50%);
 }
-.cart__costume {
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr 2fr 1fr;
-  grid-auto-rows: auto;
-  text-align: left;
-  place-items: center;
+.cart__desc {
+  display: flex;
+  justify-content: center;
+  color: var(--lite);
+}
+.cart__costumes-table {
+  border-collapse: collapse;
+  background: var(--lite);
+  width: 100%;
+  text-align: center;
+}
+.cart__costumes-table-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none; 
+}
+.cart__costumes-table tbody tr {
+  padding: 8px;
+}
+.cart__costumes-table tr + tr {
+  border-top: 3px solid var(--accent);
 }
 .costume__img-mini {
   position: relative;
   width: 40px;
   height: 60px;
 }
-.cart__btn-close {
-  padding: 8px;
-  border-radius: 50%;
-  margin-left: auto;
+.cart__rental-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cart__rental-duration .dropdown-toggle {
+  min-width: 100%;
+}
+.cart-message__btns {
+  display: flex;
+  gap: var(--gap-item);
+  flex-direction: column;
+}
+.cart-message__btn {
+  background: var(--lite);
+  color: var(--primary);
+  border: 2px solid var(--lite);
+}
+.cart-message{
+  background: var(--lite);
+  padding: var(--padd-item);
+  border-radius: var(--radius-card);
+  min-width: 100%;
+  font-family: inherit; 
+}
+.cart__interactive:hover {
+  border: 2px solid var(--lite);
+  color: #fff;
+  background: color-mix(in srgb, var(--black) 30%, transparent);
+}
+.cart-message__copy {
+  background: none;
+  color: var(--lite);
+  border: 2px solid var(--lite);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); 
+}
+.cart-message__contact {
+  background: var(--lite);
+  border: 2px solid var(--lite);
+
+}
+.cart__interactive:active {
+  background: var(--primary);
+  color: var(--lite);
+  border: 2px solid var(--lite);
 }
 
 /*АДМИНКА*/
@@ -867,7 +984,6 @@ button, a {
   justify-content: center;
   align-items: center;
   height: 100vh;
-
 }
 .admin__form{
   display: flex;
@@ -892,11 +1008,15 @@ button, a {
 .add-form__desc {
   font-size: var(--small-txt);
 }
-.admin__input {
-  max-width: 450px;
-  border-radius: var(--radius-btn);
-  padding: 16px;
-  border: 2px solid var(--primary);
+.group-dropdowns {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.group-dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .add-form__textarea {
   max-width: 450px;
@@ -1065,6 +1185,14 @@ button, a {
     flex-direction: column;
     gap: var(--gap-small);
     align-items: end;
+  }
+  .cart__rental-questions {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .cart-message__btns {
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
