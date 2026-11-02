@@ -12,7 +12,7 @@ export default async function Page() {
   return (
     <div className="main">
       <Hero/>
-      <Catalog initialCostumes={costumes}/>
+      <Catalog costumes={costumes}/>
       <Rental questions={FAQs}/>
     </div> 
   );

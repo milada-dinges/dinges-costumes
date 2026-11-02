@@ -7,53 +7,45 @@ import { Costume, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GEND
 
 import { useCartStore } from "@/source/useCartStore";
 
+import { DropDown } from "../ui/dropdown";
+
+const categoryBtns = ['Все категории', ...CATEGORIES_ARRAY] as const;
+const subcategoryBtns = ['Все подкатегории', ...SUBCATEGORIES_ARRAY] as const;
+const sizeBtns = ['Размер', ...SIZE_ARRAY] as const;
+const genderBtns = ['Пол', ...GENDER_ARRAY] as const;
+
 interface CatalogProps{
-    initialCostumes: Costume[];
+    costumes: Costume[];
 }
 
-export const Catalog = ({ initialCostumes }: CatalogProps) => {
+export const Catalog = ({ costumes }: CatalogProps) => {
     const cart = useCartStore((state) => state.cart);
     const addToCart = useCartStore((state) => state.addToCart);
     const removeFromCart = useCartStore((state) => state.removeFromCart);
 
-    const [costumes] = useState<Costume[]>(initialCostumes);
     const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('Все категории');
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubcategoryFilter>('Все подкатегории');
     const [selectedSize, setSelectedSize] = useState<SizeFilter>('Размер');
     const [selectedGender, setSelectedGender] = useState<GenderFilter>('Пол');
 
     const [activeDropdown, setActiveDropdown] = useState< 'sub' | 'size' | 'gender' | null>(null);
-
-    const categoryBtns = ['Все категории', ...CATEGORIES_ARRAY] as const;
-    const subcategoryBtns = ['Все подкатегории', ...SUBCATEGORIES_ARRAY] as const;
-    const sizeBtns = ['Размер', ...SIZE_ARRAY] as const;
-    const genderBtns = ['Пол', ...GENDER_ARRAY] as const;
-
-    const longSub = subcategoryBtns.reduce((a, b) => a.length > b.length ? a : b);
-    const longSize = sizeBtns.reduce((a, b) => a.length > b.length ? a : b);
-    const longGender = genderBtns.reduce((a, b) => a.length > b.length ? a : b);
     
     function handleCategoryChange(category: CategoryFilter) {
         setSelectedCategory(category);
         setSelectedSubcategory('Все подкатегории'); 
         setSelectedGender('Пол');
         setSelectedSize('Размер')
+        setActiveDropdown(null);
     }
     
-
     const filteredCatalog = costumes.filter((card) => {
         const matchesCategory = selectedCategory === 'Все категории' || card.category === selectedCategory;
         const matchesSize = selectedCategory !== 'Карнавальные' || selectedSize === 'Размер' || (card.sizes?.includes(selectedSize) ?? false);
         const matchesGender = selectedCategory !== 'Карнавальные' || selectedGender === 'Пол' || (card.gender?.includes(selectedGender) ?? false);
         const matchesSub = selectedCategory !== 'Карнавальные' || selectedSubcategory === 'Все подкатегории' || card.subcategory === selectedSubcategory;
 
-        console.log('selectedSize:', JSON.stringify(selectedSize));
-        console.log('card.sizes:', JSON.stringify(card.sizes));
-
         return matchesCategory && matchesSize && matchesGender && matchesSub}
     )
-
-
 
     return (
         <section className="catalog" id="catalog">
@@ -75,65 +67,34 @@ export const Catalog = ({ initialCostumes }: CatalogProps) => {
                 {selectedCategory === 'Карнавальные' && (
                     <div className="filters__carnaval">
                         <div className="filters__carnaval-dropdown">
-                            <div className="carnaval__size dropdown">
-                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'size' ? 'dropdown-toggle__open' : ''}`}
-                                onClick={() => setActiveDropdown(activeDropdown === 'size' ? null : 'size')}>
-                                    <span className="dropdown-toggle__text">{selectedSize} <svg className={`arrow ${activeDropdown === 'size' ? 'arrow__open' : ''}`}  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/></svg> </span>
-                                    <span className="dropdown-toggle__ghost">{longSize} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
-                                </button>
-                                {activeDropdown === 'size' && (
-                                    <ul className="dropdown__list">
-                                        {sizeBtns.map((liName) => (
-                                            <li key={liName} className="dropdown__item">
-                                            <button className='dropdown__btn' 
-                                            onClick={() => {setSelectedSize(liName); setActiveDropdown(null);}}>
-                                                {liName}
-                                            </button>
-                                            </li>))
-                                        }
-                                    </ul>)
-                                }
-                            </div>  
 
-                            <div className="carnaval__gender dropdown">
-                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'gender' ? 'dropdown-toggle__open' : ''}`}
-                                onClick={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}>
-                                    <span className="dropdown-toggle__text">{selectedGender} <svg className={`arrow ${activeDropdown === 'gender' ? 'arrow__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
-                                    <span className="dropdown-toggle__ghost">{longGender} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
-                                </button>
-                                {activeDropdown === 'gender' && (
-                                    <ul className="dropdown__list">
-                                        {genderBtns.map((liName) => (
-                                            <li key={liName} className="dropdown__item">
-                                            <button className='dropdown__btn' 
-                                            onClick={() => {setSelectedGender(liName); setActiveDropdown(null);}}>
-                                                {liName}
-                                            </button>
-                                            </li>))
-                                        }
-                                    </ul>)
-                                }
-                            </div>                       
+                            <DropDown 
+                            className="carnaval__sub"
+                            options={subcategoryBtns}
+                            value={selectedSubcategory}
+                            isOpen={activeDropdown === 'sub'}
+                            onToggle={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}
+                            onSelect={(option) => {setSelectedSubcategory(option); setActiveDropdown(null)}}
+                            />
+
+                            <DropDown 
+                            className="carnaval__size"
+                            options={sizeBtns}
+                            value={selectedSize}
+                            isOpen={activeDropdown === 'size'}
+                            onToggle={() => setActiveDropdown(activeDropdown === 'size' ? null : 'size')}
+                            onSelect={(option) => {setSelectedSize(option); setActiveDropdown(null)}}
+                            />
+
+                            <DropDown 
+                            className="carnaval__gender"
+                            options={genderBtns}
+                            value={selectedGender}
+                            isOpen={activeDropdown === 'gender'}
+                            onToggle={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}
+                            onSelect={(option) => {setSelectedGender(option); setActiveDropdown(null)}}
+                            />
                             
-                            <div className="carnaval__sub dropdown">
-                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'sub' ? 'dropdown-toggle__open' : ''}`}
-                                onClick={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}>
-                                    <span className="dropdown-toggle__text">{selectedSubcategory} <svg className={`arrow ${activeDropdown === 'sub' ? 'arrow__open' : ''}` }  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/> </svg> </span>
-                                    <span className="dropdown-toggle__ghost">{longSub} <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="#754F9B"/></svg> </span>
-                                </button>
-                                {activeDropdown === 'sub' && (
-                                    <ul className="dropdown__list">
-                                        {subcategoryBtns.map((liName) => (
-                                            <li key={liName} className="dropdown__item">
-                                            <button className='dropdown__btn' 
-                                            onClick={() => {setSelectedSubcategory(liName); setActiveDropdown(null);}}>
-                                                {liName}
-                                            </button>
-                                            </li>))
-                                        }
-                                    </ul>)
-                                }
-                            </div>
                         </div>
 
                         

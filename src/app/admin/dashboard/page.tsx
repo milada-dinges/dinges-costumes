@@ -105,9 +105,14 @@ export default function Dashboard () {
     }
 
     const handleToggleArray = (key: 'sizes' | 'gender', item: string) => {
+         
+        if (form.category !== 'Карнавальные') {
+            return
+        }
+
         const currentArray = form[key] as string[];
         const isExsist = currentArray.includes(item);
-        
+
         if(isExsist){
             const cleanArray = currentArray.filter(i => i !== item);
             setForm({...form, [key]: cleanArray})
@@ -269,7 +274,7 @@ export default function Dashboard () {
 
                     <label htmlFor="title">
                         Название костюма*<br />
-                        <span>(Образец записи, слеши не пишутся: /Костюм "Цыганка Розы"/)</span>
+                        <span>(Образец записи, слеши не пишутся: /Костюм\Ростовая кукла\Надувной костюм "Цыганка Розы"/)</span>
                     </label>
                     <input className="admin__input" id="title" type="text" value={form.title} onChange={handleChange}/>
 
