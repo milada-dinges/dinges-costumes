@@ -116,29 +116,30 @@ export default function Dashboard () {
             setForm({...form, [key]: newArray})
         }
     }
+
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
         if(form.category === 'Карнавальные'){
             if(
-                !form.title.trim() ||
+                form.title.trim().length <= 5 || form.title.trim().length >= 30 ||
                 !imgFile ||
-                form.pricePerDay <= 0 ||
+                form.pricePerDay < 100 || form.pricePerDay > 10000 ||
                 form.gender.length === 0 ||
                 form.sizes.length === 0 ||
                 !form.subcategory
             ) {
-                alert('Заполните все обязательыне поля для карнавальных(под * и **)')
+                alert('Проверьте поля на ошибки!')
                 return
             }
         } else {
             if (
-                    !form.title.trim() ||
+                    form.title.trim().length <= 5 || form.title.trim().length >= 30 ||
                     !form.category ||
                     !imgFile ||
-                    form.pricePerDay <= 0
+                    form.pricePerDay < 100 || form.pricePerDay > 10000
                 ) {
-                    alert('Заполните все обязательыне поля(под *)')
+                    alert('Проверьте поля на ошибки!')
                     return
             }
         }
@@ -242,6 +243,30 @@ export default function Dashboard () {
                     <p className="add-form__desc">* - поле для обязательного заполнения для всех костюмов</p>
                     <p className="add-form__desc">** - поле для обязательного заполнения для карнавальных костюмов</p>
 
+                    <div className="group-dropdown">
+                        <label htmlFor="category">
+                            Категория*
+                        </label>
+                        <div className="dropdown">
+                            <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'cat' ? 'dropdown-toggle__open' : ''}`} type="button" onClick = {() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}>
+                                <span className="dropdown-toggle__text">{form.category ? form.category : 'Не выбрана'}</span>
+                                <span className="dropdown-toggle__ghost">{CATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
+                            </button>
+                            {activeDropdown === 'cat' && (
+                                <ul className="dropdown__list" id="category">
+                                    {CATEGORIES_ARRAY.map((item) => (
+                                    <li className="dropdown__item" key={item} >
+                                        <button className='dropdown__btn' 
+                                        onClick={() => {setForm({...form, category: item}); setActiveDropdown(null)}}>
+                                            {item}
+                                        </button>
+                                    </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    </div>
+
                     <label htmlFor="title">
                         Название костюма*<br />
                         <span>(Образец записи, слеши не пишутся: /Костюм "Цыганка Розы"/)</span>
@@ -260,30 +285,6 @@ export default function Dashboard () {
                     <input className="add-form__input-file" id="imageUrl" type="file" onChange={handleFileChange}/>
 
                     <div className="group-dropdowns">
-                        <div className="group-dropdown">
-                            <label htmlFor="category">
-                                Категория*
-                            </label>
-                            <div className="dropdown">
-                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'cat' ? 'dropdown-toggle__open' : ''}`} type="button" onClick = {() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}>
-                                    <span className="dropdown-toggle__text">{form.category ? form.category : 'Не выбрана'}</span>
-                                    <span className="dropdown-toggle__ghost">{CATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                                </button>
-                                {activeDropdown === 'cat' && (
-                                    <ul className="dropdown__list" id="category">
-                                        {CATEGORIES_ARRAY.map((item) => (
-                                        <li className="dropdown__item" key={item} >
-                                            <button className='dropdown__btn' 
-                                            onClick={() => {setForm({...form, category: item}); setActiveDropdown(null)}}>
-                                                {item}
-                                            </button>
-                                        </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                        </div>
-
                         <div className="group-dropdown">
                             <label htmlFor="subcategory">
                                 Подкатегория**
