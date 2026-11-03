@@ -7,7 +7,7 @@ import { Costume, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GEND
 
 import { useCartStore } from "@/source/useCartStore";
 
-import { DropDown } from "../ui/dropdown";
+import { Dropdown } from "../ui/Dropdown";
 
 const categoryBtns = ['Все категории', ...CATEGORIES_ARRAY] as const;
 const subcategoryBtns = ['Все подкатегории', ...SUBCATEGORIES_ARRAY] as const;
@@ -68,7 +68,7 @@ export const Catalog = ({ costumes }: CatalogProps) => {
                     <div className="filters__carnaval">
                         <div className="filters__carnaval-dropdown">
 
-                            <DropDown 
+                            <Dropdown
                             className="carnaval__sub"
                             options={subcategoryBtns}
                             value={selectedSubcategory}
@@ -77,7 +77,7 @@ export const Catalog = ({ costumes }: CatalogProps) => {
                             onSelect={(option) => {setSelectedSubcategory(option); setActiveDropdown(null)}}
                             />
 
-                            <DropDown 
+                            <Dropdown 
                             className="carnaval__size"
                             options={sizeBtns}
                             value={selectedSize}
@@ -86,7 +86,7 @@ export const Catalog = ({ costumes }: CatalogProps) => {
                             onSelect={(option) => {setSelectedSize(option); setActiveDropdown(null)}}
                             />
 
-                            <DropDown 
+                            <Dropdown 
                             className="carnaval__gender"
                             options={genderBtns}
                             value={selectedGender}

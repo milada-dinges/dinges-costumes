@@ -10,12 +10,12 @@ import { getCostumes } from '@/services/costumes'
 
 import { Costume, Subcategory, Category, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GENDER_ARRAY, GenderFilter, SUBCATEGORIES_ARRAY, SubcategoryFilter } from "@/types";
 
-import { DropDown } from "@/components/ui/dropdown";
+import { Dropdown } from "@/components/ui/Dropdown";
 
 type CategoryFilterAdmin = 'Не выбрана' | Category;
 type SubcategoryFilterAdmin = 'Не выбрана' | Subcategory;
 
-const categoryBtnsAdmin = ['Не выбрана', ...CATEGORIES_ARRAY] as const;
+const categoryBtns = ['Не выбрана', ...CATEGORIES_ARRAY] as const;
 const subcategoryBtns = ['Не выбрана', ...SUBCATEGORIES_ARRAY] as const;
 
 export default function Dashboard () {
@@ -232,33 +232,14 @@ export default function Dashboard () {
                         <label htmlFor="category">
                             Категория*
                         </label>
-
-                        <DropDown
-                        options={categoryBtnsAdmin}
+                        <Dropdown
+                        id={'category'}
+                        options={categoryBtns}
                         value={form.category}
                         isOpen={activeDropdown === 'cat'}
                         onToggle={() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}
                         onSelect={(option) => {setForm({...form, category: option}); setActiveDropdown(null)}}
                         />
-                        
-                        <div className="dropdown">
-                            <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'cat' ? 'dropdown-toggle__open' : ''}`} type="button" onClick = {() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}>
-                                <span className="dropdown-toggle__text">{form.category ? form.category : 'Не выбрана'}</span>
-                                <span className="dropdown-toggle__ghost">{CATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                            </button>
-                            {activeDropdown === 'cat' && (
-                                <ul className="dropdown__list" id="category">
-                                    {CATEGORIES_ARRAY.map((item) => (
-                                    <li className="dropdown__item" key={item} >
-                                        <button className='dropdown__btn' 
-                                        onClick={() => {setForm({...form, category: item}); setActiveDropdown(null)}}>
-                                            {item}
-                                        </button>
-                                    </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
                     </div>
 
                     <label htmlFor="title">
@@ -279,28 +260,19 @@ export default function Dashboard () {
                     <input className="add-form__input-file" id="imageUrl" type="file" onChange={handleFileChange}/>
 
                     <div className="group-dropdowns">
+
                         <div className="group-dropdown">
                             <label htmlFor="subcategory">
                                 Подкатегория**
                             </label>
-                            <div className="dropdown">
-                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'sub' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}>
-                                    <span className="dropdown-toggle__text">{form.subcategory ? form.subcategory : 'Не выбрана'}</span>
-                                    <span className="dropdown-toggle__ghost">{SUBCATEGORIES_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                                </button>
-                                {activeDropdown === 'sub' && (
-                                    <ul className="dropdown__list" id="subcategory">
-                                        {SUBCATEGORIES_ARRAY.map((item) => (
-                                        <li className="dropdown__item" key={item} onClick={() => {setForm({...form, subcategory: item}); setActiveDropdown(null)}}>
-                                            <button className='dropdown__btn' 
-                                            onClick={() => {setForm({...form, subcategory: item}); setActiveDropdown(null)}}>
-                                                {item}
-                                            </button>
-                                        </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                            <Dropdown
+                            id={'subcategory'}
+                            options={subcategoryBtns}
+                            value={form.subcategory}
+                            isOpen={activeDropdown === 'sub'}
+                            onToggle={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}
+                            onSelect={(option) => {setForm({...form, subcategory: option}); setActiveDropdown(null)}}
+                            />
                         </div>
                         
                         <div className="group-dropdown">
@@ -354,6 +326,7 @@ export default function Dashboard () {
                                 )}
                             </div>
                         </div>
+                        
                     </div>
 
                     <label htmlFor="description">
