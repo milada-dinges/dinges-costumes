@@ -8,17 +8,10 @@ import Image from "next/image";
 
 import { getCostumes } from '@/services/costumes'
 
-import { Costume, Subcategory, Category, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GENDER_ARRAY, GenderFilter, SUBCATEGORIES_ARRAY, SubcategoryFilter } from "@/types";
+import { Costume, Size, Gender, CategoryFilterAdmin, SubcategoryFilterAdmin, CATEGORIES_ARRAY_ADMIN, SUBCATEGORIES_ARRAY_ADMIN, SIZE_ARRAY, GENDER_ARRAY} from "@/types";
 
 import { Dropdown } from "@/components/ui/Dropdown";
 import { MultiDropdown } from "@/components/ui/MultiDropdown";
-
-type CategoryFilterAdmin = 'Не выбрана' | Category;
-type SubcategoryFilterAdmin = 'Не выбрана' | Subcategory;
-
-const categoryBtns = ['Не выбрана', ...CATEGORIES_ARRAY] as const;
-const subcategoryBtns = ['Не выбрана', ...SUBCATEGORIES_ARRAY] as const;
-
 
 export default function Dashboard () {
     const [costumes, setCostumes ] = useState<Costume[]>([]);
@@ -33,8 +26,8 @@ export default function Dashboard () {
         title: '' as string,            
         category: 'Не выбрана' as CategoryFilterAdmin,
         subcategory: 'Не выбрана' as SubcategoryFilterAdmin,
-        gender: [] as string[],
-        sizes: [] as string[],         
+        gender: [] as Gender[],
+        sizes: [] as Size[],         
         pricePerDay: 0 as number,    
         imageUrl: '' as string,  
         description: '' as string,
@@ -234,7 +227,7 @@ export default function Dashboard () {
                         </label>
                         <Dropdown
                         id={'category'}
-                        options={categoryBtns}
+                        options={CATEGORIES_ARRAY_ADMIN}
                         value={form.category}
                         isOpen={activeDropdown === 'cat'}
                         onToggle={() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}
@@ -267,7 +260,7 @@ export default function Dashboard () {
                             </label>
                             <Dropdown
                             id={'subcategory'}
-                            options={subcategoryBtns}
+                            options={SUBCATEGORIES_ARRAY_ADMIN}
                             value={form.subcategory}
                             isOpen={activeDropdown === 'sub'}
                             onToggle={() => setActiveDropdown(activeDropdown === 'sub' ? null : 'sub')}

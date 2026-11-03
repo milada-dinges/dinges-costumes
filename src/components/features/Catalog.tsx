@@ -112,8 +112,6 @@ export const Catalog = ({ costumes }: CatalogProps) => {
             </div>
 
 
-
-
             <div className="catalog__grid">
                 {filteredCatalog.length === 0 
                 ? 

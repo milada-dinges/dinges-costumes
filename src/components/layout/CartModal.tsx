@@ -5,6 +5,9 @@ import Image from "next/image";
 
 import { useCartStore } from "@/source/useCartStore";
 
+import { Dropdown } from "../ui/Dropdown";
+import { TIME_ARRAY, DURATION_ARRAY, Time, Duration } from "@/types";
+
 export const CartModal = () => {
     const cart = useCartStore((state) => state.cart);
     const removeFromCart = useCartStore((state) => state.removeFromCart);
@@ -14,18 +17,14 @@ export const CartModal = () => {
     const today = new Date().toISOString().split('T')[0];
 
     const [date, setDate] = useState<string>(today);
-    const [timeSlot, setTimeSlot] = useState<string>('');
-    const [duration, setDuration] = useState<string>('');
+    const [timeSlot, setTimeSlot] = useState<Time>('Не выбрано');
+    const [duration, setDuration] = useState<Duration>('Не выбрано');
     const [activeDropdown, setActiveDropdown] = useState< 'time' | 'duration' | null>(null);
     const [copyStatus, setCopyStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [loadingText, setLoadingText] = useState<string>('Собираем Ваш шаблон...');
 
-    const timeSlots = ['с 9 до 10','с 10 до 11','с 18 до 19','с 19 до 20'] as const;
-    const durationOptions = ['1 сутки','2 суток','3 суток','4 суток','5 суток'] as const;
-
     const costumesText = cart.map((item) => `- ${item.title}`).join('\n');
-
     const messageText = 
 `Здравствуйте, нужны костюмы:
 ${costumesText}
@@ -81,9 +80,6 @@ ${costumesText}
         }
     }, [date, timeSlot, cart.length]);
 
-
-
-
     if (!isCartOpen) return null;
 
     return (
@@ -105,8 +101,10 @@ ${costumesText}
                             <tbody>
                                 {cart.map((item) => (
                                     <tr key={item.id}>
-                                        <td className="costume__img-mini">
-                                            <Image src={item.imageUrl} fill alt=""/>
+                                        <td className="costume__img-cell">
+                                            <div className="costume__img-container">
+                                                <Image src={item.imageUrl} fill alt=""/>
+                                            </div>
                                         </td>
                                         <td className="costume__size">{item.sizes.join(', ')}</td>
                                         <td className="costume__price">{item.pricePerDay} ₽/сутки</td>
@@ -131,48 +129,31 @@ ${costumesText}
                         
                         <div className="cart__rental-time">
                             <label htmlFor="rental-time__label">В какое время?</label>
-                            <div className="dropdown" id="rental-time">
-                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'time' ? 'dropdown-toggle__open' : ''}`} onClick={() => setActiveDropdown(activeDropdown === 'time' ? null : 'time')}>
-                                    <span className="dropdown-toggle__text">{timeSlot || 'Не выбрано'} <svg className={`arrow ${activeDropdown === 'time' ? 'arrow__open' : ''}`}  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/></svg></span>
-                                    <span className="dropdown-toggle__ghost">'Не выбрано' <svg  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/></svg></span>
-                                </button>
-                                {activeDropdown === 'time' && (
-                                    <ul className="dropdown__list">
-                                        {timeSlots.map((slot) => (
-                                            <li className="dropdown__item" key={slot}>
-                                                <button className='dropdown__btn' onClick={() => {setTimeSlot(slot); setActiveDropdown(null)}}>
-                                                    {slot}
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                            <Dropdown
+                            id={"rental-time"}
+                            options={TIME_ARRAY}
+                            value={timeSlot}
+                            isOpen={activeDropdown === 'time'}
+                            onToggle={() => setActiveDropdown(activeDropdown === 'time' ? null : 'time')}
+                            onSelect={(option) => {setTimeSlot(option); setActiveDropdown(null)}}
+                            />
                         </div>
 
                         <div className="cart__rental-duration dropdown">
-                            <label htmlFor="rental-duration__label">На сколько суток?</label>
-                            <div className="dropdown" id="rental-duration">
-                                <button className={`dropdown-toggle u-inline-grid ${activeDropdown === 'duration' ? 'dropdown-toggle__open' : ''}`} onClick={() => setActiveDropdown(activeDropdown === 'duration' ? null : 'duration')}>
-                                    <span className="dropdown-toggle__text">{duration || 'Не выбрано'} <svg className={`arrow ${activeDropdown === 'duration' ? 'arrow__open' : ''}`}  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/></svg></span>
-                                    <span className="dropdown-toggle__ghost">'Не выбрано' <svg  width="9" height="9" viewBox="0 0 9 9" xmlns="http://www.w3.org/2000/svg"><path d="M8.52002 2.00272e-05L4.26002 8.52002L1.98183e-05 1.92823e-05L8.52002 2.00272e-05Z" fill="currentColor"/></svg></span>
-                                </button>
-                                {activeDropdown === 'duration' && (
-                                    <ul className="dropdown__list">
-                                        {durationOptions.map((option) => (
-                                            <li className="dropdown__item" key={option}>
-                                                <button className='dropdown__btn' onClick={() => {setDuration(option); setActiveDropdown(null)}}>
-                                                    {option}
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                            <label htmlFor="rental-duration">На сколько суток?</label>
+                            <Dropdown
+                            id={"rental-duration"}
+                            options={DURATION_ARRAY}
+                            value={duration}
+                            isOpen={activeDropdown === 'duration'}
+                            onToggle={() => setActiveDropdown(activeDropdown === 'duration' ? null : 'duration')}
+                            onSelect={(option) => {setDuration(option); setActiveDropdown(null)}}
+                            />
                         </div>
+
                     </div>
 
-                    {timeSlot !== '' && duration !== '' && cart.length > 0 
+                    {timeSlot !== 'Не выбрано' && duration !== 'Не выбрано' && cart.length > 0 
                     ? 
                     (isLoading 
                         ?
@@ -199,7 +180,6 @@ ${costumesText}
                         Заполните все поля и тут появится сообщение-шаблон.
                     </div>)
                     }
-
                 </>)}
             </div>
         </>

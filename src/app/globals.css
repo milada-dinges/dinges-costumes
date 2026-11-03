@@ -929,10 +929,11 @@ button, a {
 .cart__costumes-table tr + tr {
   border-top: 3px solid var(--accent);
 }
-.costume__img-mini {
+.costume__img-container {
   position: relative;
-  width: 40px;
-  height: 60px;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  width: 64px;
 }
 .cart__rental-questions {
   display: flex;
