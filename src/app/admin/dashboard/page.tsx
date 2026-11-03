@@ -1,19 +1,22 @@
 'use client'
 
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
 import { supabase } from "@/services/supabase"
+
+import Image from "next/image";
 
 import { getCostumes } from '@/services/costumes'
 
-import { Costume } from "@/types";
-import { CATEGORIES_ARRAY } from "@/types";
-import { GENDER_ARRAY } from "@/types";
-import { SUBCATEGORIES_ARRAY } from "@/types";
-import { SIZE_ARRAY } from "@/types";
+import { Costume, Subcategory, Category, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GENDER_ARRAY, GenderFilter, SUBCATEGORIES_ARRAY, SubcategoryFilter } from "@/types";
 
+import { DropDown } from "@/components/ui/dropdown";
+
+type CategoryFilterAdmin = 'Не выбрана' | Category;
+type SubcategoryFilterAdmin = 'Не выбрана' | Subcategory;
+
+const categoryBtnsAdmin = ['Не выбрана', ...CATEGORIES_ARRAY] as const;
+const subcategoryBtns = ['Не выбрана', ...SUBCATEGORIES_ARRAY] as const;
 
 export default function Dashboard () {
     const [costumes, setCostumes ] = useState<Costume[]>([]);
@@ -24,20 +27,19 @@ export default function Dashboard () {
     const [activeDropdown, setActiveDropdown] = useState<'cat' | 'sub' | 'sizes' | 'gender' | null>(null)
     const [imgFile, setImgFile] = useState<File | null>(null);
 
-    const [form, setForm] = useState<Costume>({
-        title: '',            
-        category: '' as any,
-        subcategory: '' as any,
-        gender: [],
-        sizes: [],         
-        pricePerDay: 0,    
-        imageUrl: '',  
-        description: '',
+    const [form, setForm] = useState({
+        title: '' as string,            
+        category: 'Не выбрана' as CategoryFilterAdmin,
+        subcategory: 'Не выбрана' as SubcategoryFilterAdmin,
+        gender: [] as string[],
+        sizes: [] as string[],         
+        pricePerDay: 0 as number,    
+        imageUrl: '' as string,  
+        description: '' as string,
     })
 
     const fethData = async () => {
         const data = await getCostumes();
-        console.log("СМОТРИ! ИЗ БАЗЫ ПРИЛЕТЕЛО ЭТО:", data);
         setCostumes(data);
     }
 
@@ -46,7 +48,6 @@ export default function Dashboard () {
         if(!isConfirm) {
             return
         }
-
         try {
             setLoading(true);
 
@@ -60,9 +61,7 @@ export default function Dashboard () {
                 setLoading(false);
                 return
             }
-
             const imgName = imageUrl.split('/').pop();
-
             if(imgName) {
                 const { error: imgError } = await supabase
                 .storage
@@ -70,23 +69,19 @@ export default function Dashboard () {
                 .remove([imgName]);
 
                 if(imgError){
-                    alert(`Картинка не удалилась с облака: ${imgError.message}`);
+                    alert(`Картинка не удалилась из облака: ${imgError.message}`);
                     setLoading(false);
                     return
                 }
             }
-
-
         }catch(err) {
             console.error(err);
-            alert(`Критическая ошибка удаления картинки`);
+            alert(`Критическая ошибка сети!`);
             setLoading(false);
             return
         }
-
         alert('Успешное удаление костюма и его картинки из базы данных!')
         setLoading(false);
-
         await fethData();
     }
 
@@ -124,55 +119,42 @@ export default function Dashboard () {
 
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-
-        if(form.category === 'Карнавальные'){
+        if(
+            form.title.trim().length <= 5 || form.title.trim().length >= 30 ||
+            !imgFile ||
+            form.pricePerDay < 100 || form.pricePerDay > 10000 ||
+            form.category === 'Не выбрана'
+        ) {
+            alert('Проверьте поля на ошибки!')
+            return
+        }else if(form.category === 'Карнавальные') {
             if(
-                form.title.trim().length <= 5 || form.title.trim().length >= 30 ||
-                !imgFile ||
-                form.pricePerDay < 100 || form.pricePerDay > 10000 ||
-                form.gender.length === 0 ||
-                form.sizes.length === 0 ||
-                !form.subcategory
+            form.gender.length === 0 ||
+            form.sizes.length === 0 ||
+            form.subcategory === 'Не выбрана'
             ) {
                 alert('Проверьте поля на ошибки!')
                 return
             }
-        } else {
-            if (
-                    form.title.trim().length <= 5 || form.title.trim().length >= 30 ||
-                    !form.category ||
-                    !imgFile ||
-                    form.pricePerDay < 100 || form.pricePerDay > 10000
-                ) {
-                    alert('Проверьте поля на ошибки!')
-                    return
-            }
         }
-
         try{
             setLoading(true)
-
-            const fileExtention = imgFile.name.split('.').pop();
-            const uniqueFileName = `${Date.now()}.${fileExtention}`;
-
-            const { data: storageData, error: storageError } = await supabase
+            const fileExtentsion = imgFile.name.split('.').pop();
+            const uniqueFileName = `${Date.now()}.${fileExtentsion}`;
+            const { error: storageError } = await supabase
             .storage
             .from('costumes')
             .upload(uniqueFileName, imgFile);
-
             if(storageError) {
                 alert(`Ошибка хранилища изображений: ${storageError.message}`)
                 setLoading(false)
                 return
             }
-
             const { data: urlData } = supabase
             .storage
             .from('costumes')
             .getPublicUrl(uniqueFileName);
-
             const finalPublicUrl = urlData.publicUrl;
-
             const { error: dbError} = await supabase
             .from('costumes')
             .insert({
@@ -185,19 +167,17 @@ export default function Dashboard () {
                 imageUrl: finalPublicUrl,
                 description: form.description,
             })
-
             if(dbError) {
-                alert(`Ошибка быза данных: ${dbError.message}`)
+                await supabase.storage.from('costumes').remove([uniqueFileName])
+                alert(`Ошибка базы данных: ${dbError.message}`)
                 setLoading(false)
                 return
             }
-
-            alert('Костюм добавлен в базу дынных успешно!')
-
+            alert('Костюм добавлен в базу данных успешно!')
             setForm({
                 title: '',            
-                category: '' as any,
-                subcategory: '' as any,
+                category: 'Не выбрана',
+                subcategory: 'Не выбрана',
                 gender: [],
                 sizes: [],         
                 pricePerDay: 0,    
@@ -213,6 +193,7 @@ export default function Dashboard () {
         }
     }
 
+
     useEffect(() => {
         const checkAuth = async () => {
             const { data: {session} } = await supabase.auth.getSession();
@@ -222,7 +203,6 @@ export default function Dashboard () {
                 setLoading(false)
             }
         }   
-
         checkAuth()
     }, [router])
 
@@ -252,6 +232,15 @@ export default function Dashboard () {
                         <label htmlFor="category">
                             Категория*
                         </label>
+
+                        <DropDown
+                        options={categoryBtnsAdmin}
+                        value={form.category}
+                        isOpen={activeDropdown === 'cat'}
+                        onToggle={() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}
+                        onSelect={(option) => {setForm({...form, category: option}); setActiveDropdown(null)}}
+                        />
+                        
                         <div className="dropdown">
                             <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'cat' ? 'dropdown-toggle__open' : ''}`} type="button" onClick = {() => setActiveDropdown(activeDropdown === 'cat' ? null : 'cat')}>
                                 <span className="dropdown-toggle__text">{form.category ? form.category : 'Не выбрана'}</span>
