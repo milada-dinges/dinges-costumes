@@ -11,12 +11,14 @@ import { getCostumes } from '@/services/costumes'
 import { Costume, Subcategory, Category, SIZE_ARRAY, SizeFilter, CATEGORIES_ARRAY, CategoryFilter, GENDER_ARRAY, GenderFilter, SUBCATEGORIES_ARRAY, SubcategoryFilter } from "@/types";
 
 import { Dropdown } from "@/components/ui/Dropdown";
+import { MultiDropdown } from "@/components/ui/MultiDropdown";
 
 type CategoryFilterAdmin = 'Не выбрана' | Category;
 type SubcategoryFilterAdmin = 'Не выбрана' | Subcategory;
 
 const categoryBtns = ['Не выбрана', ...CATEGORIES_ARRAY] as const;
 const subcategoryBtns = ['Не выбрана', ...SUBCATEGORIES_ARRAY] as const;
+
 
 export default function Dashboard () {
     const [costumes, setCostumes ] = useState<Costume[]>([]);
@@ -85,11 +87,13 @@ export default function Dashboard () {
         await fethData();
     }
 
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(e.target.files && e.target.files[0]){
             setImgFile(e.target.files[0])
         }
     }
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         const {id, value} = e.target;
@@ -99,15 +103,10 @@ export default function Dashboard () {
         })
     }
 
-    const handleToggleArray = (key: 'sizes' | 'gender', item: string) => {
-         
-        if (form.category !== 'Карнавальные') {
-            return
-        }
 
+    const handleToggleArray = (key: 'sizes' | 'gender', item: string) => {
         const currentArray = form[key] as string[];
         const isExsist = currentArray.includes(item);
-
         if(isExsist){
             const cleanArray = currentArray.filter(i => i !== item);
             setForm({...form, [key]: cleanArray})
@@ -116,6 +115,7 @@ export default function Dashboard () {
             setForm({...form, [key]: newArray})
         }
     }
+
 
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -279,54 +279,36 @@ export default function Dashboard () {
                             <label htmlFor="sizes">
                                 Размер**
                             </label>
-                            <div className="dropdown" id="sizes">
-                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'sizes' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'sizes' ? null : 'sizes')}>
-                                    <span className="dropdown-toggle__text">{form.sizes.length !== 0 ? `Выбарно размеров: ${form.sizes.length}` : 'Не выбран'}</span>
-                                    <span className="dropdown-toggle__ghost">{SIZE_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                                </button>
-                                {activeDropdown === 'sizes' && (
-                                    <ul className="dropdown__list">
-                                        {SIZE_ARRAY.map((item) => (
-                                        <li className="dropdown__item" key={item}>
-                                            <button className='dropdown__btn' 
-                                            onClick = {() => handleToggleArray('sizes', item)}>
-                                                {item}
-                                            </button>
-                                        </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                            <MultiDropdown
+                                options={SIZE_ARRAY}
+                                selected={form.sizes}
+                                isOpen={activeDropdown === 'sizes'}
+                                onToggle={() => setActiveDropdown(activeDropdown === 'sizes' ? null : 'sizes')}
+                                onSelect={(option) => {handleToggleArray('sizes', option)}}
+                                emptyText={'Не выбран(ы)'}
+                                countText={'Выбрано: '}
+                                className={''}
+                                id={'sizes'}
+                            /> 
                         </div>
 
                         <div className="group-dropdown">
                             <label htmlFor="gender">
                                 Пол**
                             </label>
-                            <div className="dropdown" id="gender">
-                                <button className={`add-btn dropdown__toggle u-inline-grid ${activeDropdown === 'gender' ? 'dropdown-toggle__open' : ''}`} type="button" onClick={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}>
-                                    <span className="dropdown-toggle__text">
-                                        {form.gender.length === 0 && 'Не выбран'}
-                                        {form.gender.length === 1 && `${form.gender}`}
-                                        {form.gender.length === 2 && 'Унисекс'}
-                                    </span>
-                                    <span className="dropdown-toggle__ghost">{GENDER_ARRAY.reduce((a, b) => a.length > b.length ? a : b)}</span>
-                                </button>
-                                {activeDropdown === 'gender' && (
-                                    <ul className="dropdown__list">
-                                        {GENDER_ARRAY.map((item) => (
-                                            <li className="dropdown__item" key={item}>
-                                                <button className='dropdown__btn' 
-                                                onClick = {() => handleToggleArray('gender', item)}>
-                                                    {item}
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                            <MultiDropdown
+                                options={GENDER_ARRAY}
+                                selected={form.gender}
+                                isOpen={activeDropdown === 'gender'}
+                                onToggle={() => setActiveDropdown(activeDropdown === 'gender' ? null : 'gender')}
+                                onSelect={(option) => {handleToggleArray('gender', option)}}
+                                emptyText={'Не выбран(ы)'}
+                                countText={'Выбрано: '}
+                                className={''}
+                                id={'sizes'}
+                            /> 
+
                         </div>
-                        
                     </div>
 
                     <label htmlFor="description">

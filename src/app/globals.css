@@ -512,18 +512,18 @@ button, a {
   max-width: calc(100vh - 32px); 
   width: max-content;
 }
-.dropdown-toggle {
+.dropdown__toggle {
   width: max-content;
   border: none;
   background-color: var(--lite);
 }
-.dropdown-toggle__open {
+.dropdown__toggle__open {
   border: none;
   border-radius: 16px 16px 0 0;
   color: var(--primary);
   background-color: var(--lite);
 }
-.dropdown-toggle__ghost {
+.toggle__ghost {
   grid-column: 1;
   grid-row: 1;
 
@@ -533,7 +533,7 @@ button, a {
   visibility: hidden;
   white-space: nowrap;
 }
-.dropdown-toggle__text {
+.toggle__text {
   align-items: baseline;
   display: flex;
   flex-direction: row;
@@ -567,6 +567,10 @@ button, a {
   padding: 0;
   color: var(--subdued);
   box-shadow: none;
+}
+.dropdown__checkbox {
+  display: flex;
+  justify-content: center;
 }
 .arrow__open {
   transform: rotate(180deg);
@@ -1025,10 +1029,7 @@ button, a {
   border: 2px solid var(--primary);
   resize: vertical;
 }
-.add-btn {
-  border: none;
-  background-color: var(--lite);
-}
+
 .delete-table {
   border-collapse: collapse;
 }

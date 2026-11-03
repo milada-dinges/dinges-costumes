@@ -69,7 +69,7 @@ export const Catalog = ({ costumes }: CatalogProps) => {
                         <div className="filters__carnaval-dropdown">
 
                             <Dropdown
-                            className="carnaval__sub"
+                            className={"carnaval__sub"}
                             options={subcategoryBtns}
                             value={selectedSubcategory}
                             isOpen={activeDropdown === 'sub'}
@@ -78,7 +78,7 @@ export const Catalog = ({ costumes }: CatalogProps) => {
                             />
 
                             <Dropdown 
-                            className="carnaval__size"
+                            className={"carnaval__size"}
                             options={sizeBtns}
                             value={selectedSize}
                             isOpen={activeDropdown === 'size'}
@@ -87,7 +87,7 @@ export const Catalog = ({ costumes }: CatalogProps) => {
                             />
 
                             <Dropdown 
-                            className="carnaval__gender"
+                            className={"carnaval__gender"}
                             options={genderBtns}
                             value={selectedGender}
                             isOpen={activeDropdown === 'gender'}
