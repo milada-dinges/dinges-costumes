@@ -44,15 +44,13 @@ export default function Dashboard () {
         }
         try {
             setLoading(true);
-
             const { error: bdError } = await supabase
             .from('costumes')
             .delete()
             .eq('id', id);
 
             if(bdError) {
-                alert(`Ошибка удаления картинки: ${bdError.message}`);
-                setLoading(false);
+                alert(`Ошибка удаления записи: ${bdError.message}`);
                 return
             }
             const imgName = imageUrl.split('/').pop();
@@ -61,22 +59,20 @@ export default function Dashboard () {
                 .storage
                 .from('costumes')
                 .remove([imgName]);
-
                 if(imgError){
                     alert(`Картинка не удалилась из облака: ${imgError.message}`);
-                    setLoading(false);
                     return
                 }
             }
         }catch(err) {
             console.error(err);
             alert(`Критическая ошибка сети!`);
-            setLoading(false);
             return
+        } finally {
+            setLoading(false);
+            await fethData();
         }
         alert('Успешное удаление костюма и его картинки из базы данных!')
-        setLoading(false);
-        await fethData();
     }
 
 
