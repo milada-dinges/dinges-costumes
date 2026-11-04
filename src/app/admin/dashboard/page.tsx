@@ -108,7 +108,7 @@ export default function Dashboard () {
     const handleSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
         if(
-            form.title.trim().length <= 5 || form.title.trim().length >= 30 ||
+            form.title.trim().length <= 5 || form.title.trim().length >= 50 ||
             !imgFile ||
             form.pricePerDay < 100 || form.pricePerDay > 10000 ||
             form.category === 'Не выбрана'
