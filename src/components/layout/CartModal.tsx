@@ -102,9 +102,9 @@ ${costumesText}
                             <tbody>
                                 {cart.map((item) => (
                                     <tr key={item.id}>
-                                        <td className="costume__img-cell">
+                                        <td className="costume__img-td">
                                             <div className="costume__img-container">
-                                                <Image src={item.imageUrl} fill alt=""/>
+                                                <Image className="tbody__img" src={item.imageUrl} fill alt=""/>
                                             </div>
                                         </td>
                                         <td className="costume__size">{item.sizes.length > 0 ? item.sizes.join(', ') : 'Ед. размер'}</td>

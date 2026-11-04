@@ -3,18 +3,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  robots: { index: false, follow: false },
   title: "Аренда костюмов и ростовых кукол в Барнауле | Костюмерная Дингес",
   description: "Прокат карнавальных костюмов, надувных и ростовых кукол в Барнауле. Аренда без залога, просто по паспорту. Безопасная сделка и отзывы на Авито! Заходите!",
   icons: {
     icon: "/favicon.ico", // Файл иконки должен лежать в папке public
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 export default function RootLayout({children,}: {children: React.ReactNode;}) {
+
   return (
     <html lang="ru">
       <body>
