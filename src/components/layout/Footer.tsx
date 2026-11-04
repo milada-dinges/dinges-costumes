@@ -17,7 +17,7 @@ const PatternItem = () => (
 
 const PatternItems = Array.from({length: 20});
 
-export default function Footer() {
+export const Footer = () => {
     return(
         <footer className="footer">
             <div className="footer__pattern">

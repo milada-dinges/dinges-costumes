@@ -1,6 +1,6 @@
-import Hero from '../../components/sections/Hero'
+import { Hero } from '../../components/sections/Hero'
 import { Catalog } from '../../components/features/Catalog'
-import Rental from '@/components/features/Rental'
+import { Rental } from '@/components/features/Rental'
 
 import { getCostumes } from '@/services/costumes'
 import { FAQs } from '../../data/FAQs'

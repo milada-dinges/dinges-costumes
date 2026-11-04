@@ -5,14 +5,11 @@ import { FAQ } from "../../types"
 
 import Image from "next/image";
 
-
 interface rentalPops{
   questions: FAQ[];
 }
 
-
-export default function Rental({questions}: rentalPops) {
-
+export const Rental = ({questions}: rentalPops) => {
   const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
 
   return (
