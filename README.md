@@ -18,5 +18,5 @@ React, TypeScript, Next.js, Zustand, Supabase (PostgreSQL, вход, храни�
 ## Скриншоты
 
 ![Главная](public/screenshots/home.png)
-![Каталог](public/screenshots/catalog.png)
-![Админка](public/screenshots/admin.png)
+![Админка](public/screenshots/dashboard.png)
+![Вход в админку](public/screenshots/admin.png)
