@@ -305,7 +305,6 @@ button, a {
 .hero-info__desc {
   display: none;
 }
-
 .hero-info__content {
   display: flex;
   flex-direction: column;
@@ -349,7 +348,6 @@ button, a {
   -webkit-mask-image: radial-gradient(circle 20px at 50% 0px, transparent 0px, transparent 18px, rgba(0, 0, 0, 0.1) 19px, #fff 21px);
   mask-image: radial-gradient(circle 20px at 50% 0px, transparent 0px, transparent 18px, rgba(0, 0, 0, 0.1) 19px, #fff 21px);
 }
-
 .point__icon-container {
   position: absolute;
   top: 0;
@@ -373,7 +371,12 @@ button, a {
   flex-direction: row;
   justify-content: space-between;
 }
-
+.hero-info__to-calatog:hover {
+  background: color-mix(in srgb, var(--accent), var(--black) 20%);
+}
+.hero-info__to-calatog:active {
+  background: color-mix(in srgb, var(--accent), var(--black) 35%);
+}
 .hero-photo {
   display: none;
 
