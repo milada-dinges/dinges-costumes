@@ -38,6 +38,7 @@ export default function Dashboard () {
         setCostumes(data);
     }
 
+
     const handleDelete = async (id: string, imageUrl: string) => {
         const isConfirm = confirm('Вы уверены что хотите УДАЛИТЬ костюм?')
         if(!isConfirm) {
