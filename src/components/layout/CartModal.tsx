@@ -14,7 +14,8 @@ export const CartModal = () => {
     const closeCart = useCartStore((state) => state.closeCart);
     const isCartOpen = useCartStore((state) => state.isCartOpen);
     const totalPricePerDay = cart.reduce((sum, item) => sum + item.pricePerDay, 0);
-    const today = new Date().toISOString().split('T')[0];
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
     const [date, setDate] = useState<string>(today);
     const [timeSlot, setTimeSlot] = useState<Time>('Не выбрано');
@@ -106,7 +107,7 @@ ${costumesText}
                                                 <Image src={item.imageUrl} fill alt=""/>
                                             </div>
                                         </td>
-                                        <td className="costume__size">{item.sizes.join(', ')}</td>
+                                        <td className="costume__size">{item.sizes.length > 0 ? item.sizes.join(', ') : 'Ед. размер'}</td>
                                         <td className="costume__price">{item.pricePerDay} ₽/сутки</td>
                                         <td>
                                             <button className="cart__btn-del" onClick={() => removeFromCart(item.id)}>

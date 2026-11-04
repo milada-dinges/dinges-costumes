@@ -186,13 +186,14 @@ export default function Dashboard () {
         const checkAuth = async () => {
             const { data: {session} } = await supabase.auth.getSession();
             if (!session){
-                router.push('/admin');
+                router.replace('/admin');
             }else {
                 setLoading(false)
             }
         }   
         checkAuth()
     }, [router])
+
 
     useEffect(() => {
         if(!loading) {
