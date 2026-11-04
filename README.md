@@ -14,3 +14,9 @@
 ## Технологии
 
 React, TypeScript, Next.js, Zustand, Supabase (PostgreSQL, вход, хранилище картинок), CSS
+
+## Скриншоты
+
+![Главная](public/screenshots/home.png)
+![Каталог](public/screenshots/catalog.png)
+![Админка](public/screenshots/admin.png)
