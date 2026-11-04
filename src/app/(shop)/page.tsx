@@ -5,6 +5,8 @@ import Rental from '@/components/features/Rental'
 import { getCostumes } from '@/services/costumes'
 import { FAQs } from '../../data/FAQs'
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
 
   const costumes = await getCostumes();
