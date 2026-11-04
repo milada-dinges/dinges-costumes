@@ -7,9 +7,7 @@ import { supabase } from "@/services/supabase"
 import Image from "next/image";
 
 import { getCostumes } from '@/services/costumes'
-
 import { Costume, Size, Gender, CategoryFilterAdmin, SubcategoryFilterAdmin, CATEGORIES_ARRAY_ADMIN, SUBCATEGORIES_ARRAY_ADMIN, SIZE_ARRAY, GENDER_ARRAY} from "@/types";
-
 import { Dropdown } from "@/components/ui/Dropdown";
 import { MultiDropdown } from "@/components/ui/MultiDropdown";
 
@@ -335,7 +333,9 @@ export default function Dashboard () {
                         {costumes.map((item) => (
                                 <tr className="tbody__costume" key={item.id}>
                                     <td className="tbody__td-img">
-                                        <img src={item.imageUrl}/>
+                                        <div className="tbody__img-container">
+                                            <Image className="tbody__img" fill src={item.imageUrl} alt=""/>
+                                        </div>
                                     </td>
                                     <td>{item.title}</td>
                                     <td>{item.category}</td>

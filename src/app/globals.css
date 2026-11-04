@@ -1044,9 +1044,17 @@ button, a {
   font-size: var(--small-txt);
 }
 .tbody__td-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 48px;
+  padding: 0 !important;
+}
+.tbody__img-container{
+  position: relative;
+  aspect-ratio: 3/4;
+  width: 100%;
+  overflow: hidden;
+}
+.tbody__img {
+  object-fit: cover;
 }
 .delete-table td, .delete-table th{
   border: 2px solid var(--primary);
