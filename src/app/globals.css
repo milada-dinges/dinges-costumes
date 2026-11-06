@@ -266,9 +266,6 @@ button:active, a:active {
 
   animation: fadeIn 0.15s ease-out;
 }
-.dropdown__list:active {
-  transform: scale(0.98);
-}
 .dropdown__btn {
   white-space: nowrap;
   width: 100%;
@@ -725,6 +722,12 @@ button:active, a:active {
   border-bottom-left-radius: var(--radius-btn);
   border-bottom-right-radius: var(--radius-btn);
 }
+.rental-terms__question__active {
+  border-top-left-radius: calc(var(--radius-btn) - 2px);
+  border-top-right-radius: calc(var(--radius-btn) - 2px);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
 .rental-terms__question:nth-child(even) .rental-terms__btn{
   background: var(--lite);
 }
@@ -751,8 +754,8 @@ button:active, a:active {
   transform: scale(1);
 }
 .rental-terms__btn__active {
-  border-top-left-radius: calc(var(--radius-btn) - 2px);
-  border-top-right-radius: calc(var(--radius-btn) - 2px);
+  border-top-left-radius: calc(var(--radius-btn) - 6px);
+  border-top-right-radius: calc(var(--radius-btn) - 6px);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -1188,6 +1191,19 @@ button:active, a:active {
     padding-block: var(--padd-item);
     padding-inline: var(--padd-item);
   }
+  .rental-terms__question__active {
+    border-top-left-radius: var(--radius-btn);
+    border-top-right-radius: var(--radius-btn);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+  .rental-terms__btn__active {
+    border-top-left-radius: calc(var(--radius-btn) - 4px);
+    border-top-right-radius: calc(var(--radius-btn) - 4px);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   .footer__pattern {
     --circle-size: 50px;
   }

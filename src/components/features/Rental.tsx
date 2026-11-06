@@ -24,6 +24,7 @@ export const Rental = ({questions}: rentalPops) => {
               {q.question}
               <div className={`rental-terms__arrow-container ${activeQuestion === q.id ? 'rental-terms__arrow-container__active' : ''}`}>
                 <Image className='rental-terms__arrow' src='/icons/arrow.svg' width={18} height={9} alt=""></Image>
+                
               </div>
             </button>
 
