@@ -83,12 +83,12 @@ export default function Dashboard () {
     }
 
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {id, value} = e.target;
 
-        setForm({
-            ...form, [id]: id === 'pricePerDay' ?  Number(value) || 0 : value
-        })
+        setForm((prev) => ({
+            ...prev, [id]: id === 'pricePerDay' ?  Number(value) || 0 : value
+        }))
     }
 
 

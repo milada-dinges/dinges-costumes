@@ -520,7 +520,7 @@ button, a {
 }
 .dropdown__toggle__open {
   border: none;
-  border-radius: 24px 24px 0 0;
+  border-radius: 16px 16px 0 0;
   color: var(--primary);
   background-color: var(--lite);
 }
@@ -1115,7 +1115,9 @@ button, a {
     --icon-container: 40px;
     --padd-item: 16px;
   }
-  
+  .dropdown__toggle__open {
+    border-radius: 24px 24px 0 0;
+  }
   .header__logo {
     position: absolute;
     top: var(--padd-v-header);
