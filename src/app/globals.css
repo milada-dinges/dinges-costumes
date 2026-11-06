@@ -560,6 +560,12 @@ button, a {
   padding-bottom: 8px;
   border-bottom-left-radius: var(--radius-card);
   border-bottom-right-radius: var(--radius-card);
+
+  animation: fadeIn 0.15s ease;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-4px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 .dropdown__btn {
   white-space: nowrap;
@@ -1292,4 +1298,8 @@ button, a {
   .footer__pattern {
     --circle-size: 60px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
