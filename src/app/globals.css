@@ -157,8 +157,11 @@ button, a {
   text-decoration: none;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
-}
 
+}
+button:active, a:active {
+  transform: scale(0.98);
+}
 /*Стили для классов*/
 .round-btn {
   background-color: transparent;
@@ -202,6 +205,84 @@ button, a {
 }
 .bold {
   font-weight: 600;
+}
+
+/*выпадающий список*/
+.dropdown {
+  position: relative;
+  max-width: calc(100vh - 32px); 
+  width: max-content;
+}
+.dropdown__toggle {
+  width: max-content;
+  border: none;
+  background-color: var(--lite);
+}
+.dropdown__toggle:active {
+  transform: scale(1);
+}
+.dropdown__toggle__open {
+  border: none;
+  border-radius: 16px 16px 0 0;
+  color: var(--primary);
+  background-color: var(--lite);
+}
+.toggle__ghost {
+  grid-column: 1;
+  grid-row: 1;
+
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  visibility: hidden;
+  white-space: nowrap;
+}
+.toggle__text {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+  grid-column: 1;
+  grid-row: 1;
+}
+.dropdown__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  z-index: 7;
+  border: 2px solid var(--lite);
+  background: color-mix(in srgb, var(--black) 20%, var(--primary));
+  margin: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom-left-radius: var(--radius-card);
+  border-bottom-right-radius: var(--radius-card);
+
+  animation: fadeIn 0.15s ease-out;
+}
+.dropdown__list:active {
+  transform: scale(0.98);
+}
+.dropdown__btn {
+  white-space: nowrap;
+  width: 100%;
+  border: none;
+  padding: 0;
+  color: var(--subdued);
+  box-shadow: none;
+}
+.dropdown__checkbox {
+  display: flex;
+  justify-content: center;
+}
+.arrow__open {
+  transform: rotate(180deg);
 }
 
 /*Шапка*/
@@ -507,78 +588,6 @@ button, a {
   gap: var(--gap-small);
 }
 
-/*выпадающий список*/
-.dropdown {
-  position: relative;
-  max-width: calc(100vh - 32px); 
-  width: max-content;
-}
-.dropdown__toggle {
-  width: max-content;
-  border: none;
-  background-color: var(--lite);
-}
-.dropdown__toggle__open {
-  border: none;
-  border-radius: 16px 16px 0 0;
-  color: var(--primary);
-  background-color: var(--lite);
-}
-.toggle__ghost {
-  grid-column: 1;
-  grid-row: 1;
-
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  visibility: hidden;
-  white-space: nowrap;
-}
-.toggle__text {
-  align-items: baseline;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 4px;
-  grid-column: 1;
-  grid-row: 1;
-}
-.dropdown__list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 4px;
-  z-index: 7;
-  border: 2px solid var(--lite);
-  background: color-mix(in srgb, var(--black) 20%, var(--primary));
-  margin: 0;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  border-bottom-left-radius: var(--radius-card);
-  border-bottom-right-radius: var(--radius-card);
-
-  animation: fadeIn 0.15s ease;
-}
-.dropdown__btn {
-  white-space: nowrap;
-  width: 100%;
-  border: none;
-  padding: 0;
-  color: var(--subdued);
-  box-shadow: none;
-}
-.dropdown__checkbox {
-  display: flex;
-  justify-content: center;
-}
-.arrow__open {
-  transform: rotate(180deg);
-}
-
 /*подкатегории пк*/
 .carnaval__sub-pc {
   display: none;
@@ -623,6 +632,8 @@ button, a {
   font-size: var(--small-txt);
   color: var(--lite);
   border-radius: var(--radius-card);
+
+  animation: cardIn 0.4s ease-out both;
 }
 .card__top {
   display: flex;
@@ -734,7 +745,10 @@ button, a {
   padding-inline: var(--padd-h-btn);
   padding-block: var(--padd-v-btn);
 
-    box-shadow: none; 
+  box-shadow: none; 
+}
+.rental-terms__btn:active {
+  transform: scale(1);
 }
 .rental-terms__btn__active {
   border-top-left-radius: calc(var(--radius-btn) - 2px);
@@ -769,6 +783,8 @@ button, a {
   padding-inline: var(--padd-item);
   padding-block: var(--padd-item);
   font-size: var(--small-txt);
+
+  animation: fadeIn 0.15s ease-out;
 }
 
 /*Подвал*/
@@ -907,6 +923,12 @@ button, a {
 .cart__btn-close {
   margin-left: 50%;
     transform: translateX(-50%);
+}
+.cart__btn-close {
+  transform: scale(1);
+}
+.cart__btn-close:active {
+  transform: translateY(2px);
 }
 .cart__desc {
   display: flex;
@@ -1302,5 +1324,9 @@ button, a {
 
 @keyframes fadeIn {
   from {opacity: 0; transform: translateY(-4px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes cardIn {
+  from {opacity: 0; transform: translateY(8px);}
   to {opacity: 1; transform: translateY(0);}
 }
