@@ -563,10 +563,6 @@ button, a {
 
   animation: fadeIn 0.15s ease;
 }
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(-4px);}
-  to {opacity: 1; transform: translateY(0);}
-}
 .dropdown__btn {
   white-space: nowrap;
   width: 100%;
@@ -1299,7 +1295,12 @@ button, a {
     --circle-size: 60px;
   }
 }
-
+/* Анимации */
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-4px);}
+  to {opacity: 1; transform: translateY(0);}
 }
