@@ -37,7 +37,7 @@ export const Footer = () => {
               <nav className="footer__nav">
                 <a href="#" target="_blank" rel="noopener noreferrer">Отзывы на Авито</a>
                 <a href="#" target="_blank" rel="noopener noreferrer">Профиль на Авито</a>
-                <a href="#" target="_blank" rel="noopener noreferrer">Написать в ЛС на Авито</a>
+                <a href="#" target="_blank" rel="noopener noreferrer">Написать на Авито</a>
               </nav>
             </div>
 

@@ -884,24 +884,11 @@ button:active, a:active {
   width: 100vw;
   width: 100dvw;
 
-
-  overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
   -ms-overflow-style: none; 
 
-
-  border: none;
-  -webkit-mask-image: none;
-  mask-image: none;
-
-  -webkit-mask-composite: none;
-  mask-composite: none;
-  
   background: var(--accent);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
 }
 .cart__rental-questions label {
   color: var(--lite);
@@ -914,11 +901,7 @@ button:active, a:active {
   box-shadow: none;
 }
 .cart__btn-close {
-  margin-left: 50%;
-    transform: translateX(-50%);
-}
-.cart__btn-close {
-  transform: scale(1);
+  align-self: center;
 }
 .cart__btn-close:active {
   transform: translateY(2px);
